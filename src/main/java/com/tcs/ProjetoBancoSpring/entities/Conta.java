@@ -1,4 +1,6 @@
 package com.tcs.ProjetoBancoSpring.entities;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -6,7 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Conta {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     private long idconta;
     private long conta;
 
@@ -15,8 +18,7 @@ public class Conta {
 
     private long agencia;
 
-    public Conta(long idconta, long conta, long agencia) {
-        this.idconta = idconta;
+    public Conta(long conta, long agencia) {
         this.conta = conta;
         this.agencia = agencia;
     }

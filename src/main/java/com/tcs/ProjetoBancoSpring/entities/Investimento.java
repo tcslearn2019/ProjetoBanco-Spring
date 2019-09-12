@@ -1,4 +1,6 @@
 package com.tcs.ProjetoBancoSpring.entities;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,7 +9,8 @@ import java.util.Date;
 @Entity
 public class Investimento {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     private long idinvenstimento;
     private Date data;
     private double valor;
