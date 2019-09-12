@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @SpringBootApplication
 public interface UserRepository extends JpaRepository<User, Long> {
+
 }

@@ -17,7 +17,7 @@ public class Investimento {
     public Investimento() {
     }
 
-    public Investimento(long idinvenstimento, Date data, double valor, long idusuario, long idtipoinv) {
+    public Investimento(Date data, double valor, long idusuario, long idtipoinv) {
         this.idinvenstimento = idinvenstimento;
         this.data = data;
         this.valor = valor;

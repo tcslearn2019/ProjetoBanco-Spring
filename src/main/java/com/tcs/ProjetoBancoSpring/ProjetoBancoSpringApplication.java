@@ -1,15 +1,22 @@
 package com.tcs.ProjetoBancoSpring;
 
+import com.tcs.ProjetoBancoSpring.entities.Investimento;
+import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
 import com.tcs.ProjetoBancoSpring.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
+
+import java.util.Date;
+
 @SpringBootApplication
 public class ProjetoBancoSpringApplication implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private InvestimentoRepository InvestimentoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoBancoSpringApplication.class, args);
@@ -20,6 +27,8 @@ public class ProjetoBancoSpringApplication implements CommandLineRunner {
         userRepository.save(new User("one","one","0","0","Oi","111"));
         userRepository.save(new User("two","one","0","0","Oi","111"));
         userRepository.save(new User("three","one","0","0","Oi","111"));
+        Date date = new Date();
+        InvestimentoRepository.save(new Investimento(date,123.5,1,2));
     }
 
 }
