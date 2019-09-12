@@ -10,7 +10,6 @@ public class UserController {
 
     public UserController userController;
 
-    public ApplicationContext context;
 
 
 
