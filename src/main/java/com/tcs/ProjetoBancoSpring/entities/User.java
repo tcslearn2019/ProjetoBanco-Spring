@@ -21,8 +21,7 @@ public class User {
 
     }
 
-    public User(Long id, String fname, String lname, String cpf, String pwd, String email, String tel) {
-        this.id = id;
+    public User(String fname, String lname, String cpf, String pwd, String email, String tel) {
         this.fname = fname;
         this.lname = lname;
         this.cpf = cpf;
