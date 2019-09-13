@@ -12,6 +12,7 @@ import java.util.Optional;
 @RequestMapping("/banco")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*" )
 public class InvestimentoController {
+
     @Autowired
     private InvestimentoRepository InvestimentoRepository;
 

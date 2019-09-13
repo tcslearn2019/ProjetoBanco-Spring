@@ -12,11 +12,10 @@ public class Conta {
     @GenericGenerator(name="increment", strategy = "increment")
     private long idconta;
     private long conta;
+    private long agencia;
 
     public Conta() {
     }
-
-    private long agencia;
 
     public Conta(long conta, long agencia) {
         this.conta = conta;
