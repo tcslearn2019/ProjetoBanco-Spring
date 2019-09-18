@@ -46,8 +46,6 @@ public class UserController {
 
     @PostMapping("/validation")
     public User getValidation(@RequestBody Login login){
-        System.out.println(login.getLogin());
-        System.out.println(login.getPwd());
         List<User> Usuarios = getUsers();
         for(User i : Usuarios){
             if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {

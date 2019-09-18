@@ -1,13 +1,8 @@
+
 package com.tcs.ProjetoBancoSpring;
 
-import com.tcs.ProjetoBancoSpring.entities.Investimento;
-import com.tcs.ProjetoBancoSpring.entities.User;
-import com.tcs.ProjetoBancoSpring.entities.Conta;
-import com.tcs.ProjetoBancoSpring.entities.TipoInvestimento;
-import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
-import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
-import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
-import com.tcs.ProjetoBancoSpring.repositories.TipoInvestimentoRepository;
+import com.tcs.ProjetoBancoSpring.entities.*;
+import com.tcs.ProjetoBancoSpring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
@@ -25,8 +20,11 @@ public class ProjetoBancoSpringApplication implements CommandLineRunner {
     private TipoInvestimentoRepository TipoInvestimentoRepository;
     @Autowired
     private ContaRepository ContaRepository;
+    @Autowired
+    private TransferenciasRepository TransferenciaRepository;
 
-	public static void main(String[] args) {
+
+    public static void main(String[] args) {
 		SpringApplication.run(ProjetoBancoSpringApplication.class, args);
 	}
 
@@ -36,11 +34,13 @@ public class ProjetoBancoSpringApplication implements CommandLineRunner {
         userRepository.save(new User("two","one","0","0","Oi","111"));
         userRepository.save(new User("three","one","123","456","Oi","111"));
         ContaRepository.save(new Conta(1,131,122,0));
-        ContaRepository.save(new Conta(2,31,12,120));
         ContaRepository.save(new Conta(3,11,22,311));
+        ContaRepository.save(new Conta(2,31,12,120));
         Date date = new Date();
         InvestimentoRepository.save(new Investimento(date,123.5,1,2));
         TipoInvestimentoRepository.save(new TipoInvestimento("Poupança", 2.7));
+        TransferenciaRepository.save(new Transferencias(123,321,150));
+
     }
 
 }
