@@ -34,10 +34,10 @@ public class ProjetoBancoSpringApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         userRepository.save(new User("one","one","0","0","Oi","111"));
         userRepository.save(new User("two","one","0","0","Oi","111"));
-        userRepository.save(new User("three","one","0","0","Oi","111"));
-        ContaRepository.save(new Conta(131,122));
-        ContaRepository.save(new Conta(31,12));
-        ContaRepository.save(new Conta(11,22));
+        userRepository.save(new User("three","one","123","456","Oi","111"));
+        ContaRepository.save(new Conta(1,131,122,0));
+        ContaRepository.save(new Conta(2,31,12,120));
+        ContaRepository.save(new Conta(3,11,22,311));
         Date date = new Date();
         InvestimentoRepository.save(new Investimento(date,123.5,1,2));
         TipoInvestimentoRepository.save(new TipoInvestimento("Poupança", 2.7));

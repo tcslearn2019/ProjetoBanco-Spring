@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.tcs.ProjetoBancoSpring.entities.User;
+import com.tcs.ProjetoBancoSpring.entities.Login;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,5 +42,23 @@ public class UserController {
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         return userRepository.save(user);
+    }
+
+    @PostMapping("/validation")
+    public User getValidation(@RequestBody Login login){
+        System.out.println(login.getLogin());
+        System.out.println(login.getPwd());
+        List<User> Usuarios = getUsers();
+        for(User i : Usuarios){
+            if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {
+                System.out.println(i.getFname());
+                return i;
+            }
+        }
+        System.out.println("--------------------");
+        Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
+
+
+        return null;
     }
 }

@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @SpringBootApplication
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    public User findByPwd(String pwd);
+    public User findByCpf(String cpf);
 }
