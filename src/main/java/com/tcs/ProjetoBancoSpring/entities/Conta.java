@@ -13,7 +13,7 @@ public class Conta {
     private User fkIdUser;
     private long conta;
     private long agencia;
-    private long saldo;
+    private double saldo;
 
     public Conta() {
     }
@@ -33,11 +33,11 @@ public class Conta {
         this.fkIdUser = iduser;
     }
 
-    public long getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

@@ -13,14 +13,14 @@ public class Transferencias {
     private long idTransferencias;
     private long idContaOrigem;
     private long idContaDestino;
-    private long valor;
+    private double valor;
     private Date dataTransferencia;
 
     public Transferencias(){
 
     }
 
-    public Transferencias(long idContaOrigem, long idContaDestino, long valor, Date dataTransferencia) {
+    public Transferencias(long idContaOrigem, long idContaDestino, double valor, Date dataTransferencia) {
         this.idContaOrigem = idContaOrigem;
         this.idContaDestino = idContaDestino;
         this.valor = valor;
@@ -52,11 +52,11 @@ public class Transferencias {
         this.idTransferencias = idTransferencias;
     }
 
-    public long getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(long valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 

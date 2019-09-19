@@ -65,11 +65,11 @@ public class TransferenciasController {
                 Long.toString(conta.getConta()).equals(paramTransf.getConta())
                 && Long.toString(conta.getAgencia()).equals(paramTransf.getAgencia())).findFirst();
 
-        return Operacao(Origem.get().getIdconta(),Destino.get().getIdconta(), Long.parseLong(paramTransf.getValor()));
+        return Operacao(Origem.get().getIdconta(),Destino.get().getIdconta(), Double.parseDouble(paramTransf.getValor()));
     }
 
-    private boolean Operacao(long idOrigem, long idDestino, long valorTransfer){
-        if(contaRepository.findById(idOrigem).get().getSaldo() > valorTransfer){
+    private boolean Operacao(long idOrigem, long idDestino, Double valorTransfer){
+        if(contaRepository.findById(idOrigem).get().getSaldo() >= valorTransfer){
             Conta temporario = new Conta();
             temporario = contaRepository.findById(idDestino).get();
             temporario.setSaldo(temporario.getSaldo() + valorTransfer);
