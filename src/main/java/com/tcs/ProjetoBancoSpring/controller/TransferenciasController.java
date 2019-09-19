@@ -60,6 +60,8 @@ public class TransferenciasController {
         System.out.println(paramTransf.getValor());
         System.out.println(paramTransf.getAgencia());
         System.out.println(paramTransf.getIdOrigem());
+        System.out.println(contaRepository.findAll());
+
 
         return true;
     }

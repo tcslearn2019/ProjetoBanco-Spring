@@ -1,5 +1,4 @@
 package com.tcs.ProjetoBancoSpring.entities;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,12 +6,11 @@ import javax.persistence.*;
 @Entity
 public class Conta {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idconta;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
-    private User fk_iduser;
+    private User fkIdUser;
     private long conta;
     private long agencia;
     private long saldo;
@@ -20,19 +18,19 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(User fk_iduser, long conta, long agencia, long saldo) {
-        this.fk_iduser = fk_iduser;
+    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+        this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
     }
 
     public User getIduser() {
-        return fk_iduser;
+        return fkIdUser;
     }
 
     public void setIduser(User iduser) {
-        this.fk_iduser = iduser;
+        this.fkIdUser = iduser;
     }
 
     public long getSaldo() {

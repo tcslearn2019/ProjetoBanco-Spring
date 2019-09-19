@@ -2,17 +2,13 @@ package com.tcs.ProjetoBancoSpring.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fname;
     private String lname;
@@ -33,7 +29,15 @@ public class User {
         this.email = email;
         this.tel = tel;
     }
-
+    public User(Long id, String fname, String lname, String cpf, String pwd, String email, String tel) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+        this.cpf = cpf;
+        this.pwd = pwd;
+        this.email = email;
+        this.tel = tel;
+    }
     public Long getId() {
         return id;
     }

@@ -7,9 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @SpringBootApplication
 public interface ContaRepository extends JpaRepository<Conta, Long>{
-
-    Conta findId(User idUser);
-
-    Boolean existFindId(User idUser);
-
+    
 }
