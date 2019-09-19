@@ -1,6 +1,8 @@
 
 package com.tcs.ProjetoBancoSpring.controller;
 
+import com.tcs.ProjetoBancoSpring.entities.Conta;
+import com.tcs.ProjetoBancoSpring.entities.User;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.TransferenciasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.tcs.ProjetoBancoSpring.entities.Transferencias;
 import com.tcs.ProjetoBancoSpring.entities.ParamTransf;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,19 +58,32 @@ public class TransferenciasController {
 
     @PostMapping("/transferencia")
     public boolean getValidation(@RequestBody ParamTransf paramTransf){
-        System.out.println("--------------------");
-        System.out.println(paramTransf.getConta());
-        System.out.println(paramTransf.getValor());
-        System.out.println(paramTransf.getAgencia());
-        System.out.println(paramTransf.getIdOrigem());
-        System.out.println(contaRepository.findAll());
+        Optional<Conta> Origem = contaRepository.findAll().stream().filter(conta ->
+                Long.toString(conta.getFkIdUser().getId()).equals(paramTransf.getIdOrigem())).findFirst();
 
+        Optional<Conta> Destino = contaRepository.findAll().stream().filter(conta ->
+                Long.toString(conta.getConta()).equals(paramTransf.getConta())
+                && Long.toString(conta.getAgencia()).equals(paramTransf.getAgencia())).findFirst();
 
-        return true;
+        return Operacao(Origem.get().getIdconta(),Destino.get().getIdconta(), Long.parseLong(paramTransf.getValor()));
     }
 
-    private void Operacao(String idOrigem, String idDestino){
-
+    private boolean Operacao(long idOrigem, long idDestino, long valorTransfer){
+        if(contaRepository.findById(idOrigem).get().getSaldo() > valorTransfer){
+            Conta temporario = new Conta();
+            temporario = contaRepository.findById(idDestino).get();
+            temporario.setSaldo(temporario.getSaldo() + valorTransfer);
+            contaRepository.save(temporario);
+            temporario = contaRepository.findById(idOrigem).get();
+            temporario.setSaldo(temporario.getSaldo() - valorTransfer);
+            contaRepository.save(temporario);
+            Transferencias transf = new Transferencias(idOrigem,idDestino,valorTransfer,new Date(System.currentTimeMillis()));
+            transferenciasRepository.save(transf);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 

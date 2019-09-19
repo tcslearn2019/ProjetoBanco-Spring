@@ -65,13 +65,30 @@ public class Conta {
         this.conta = conta;
     }
 
+    public User getFkIdUser() {
+        return fkIdUser;
+    }
+
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
+    }
+
+    public long getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(long agencia) {
+        this.agencia = agencia;
+    }
 
     @Override
     public String toString() {
         return "Conta{" +
                 "idconta=" + idconta +
                 ", conta=" + conta  +
-                ", agencia=" +
+                ", agencia=" + agencia +
+                ", saldo=" + saldo +
+                ", idOrigemUsuario=" + fkIdUser.getId() +
                 '}';
     }
 

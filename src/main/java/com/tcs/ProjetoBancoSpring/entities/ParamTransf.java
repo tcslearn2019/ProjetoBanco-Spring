@@ -4,7 +4,6 @@ public class ParamTransf {
     private String agencia;
     private String conta;
     private String valor;
-
     private String idOrigem;
 
     public ParamTransf(String agencia, String conta, String valor, String idOrigem) {

@@ -53,7 +53,6 @@ public class UserController {
                 return i;
             }
         }
-        System.out.println("--------------------");
         Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
 
 
