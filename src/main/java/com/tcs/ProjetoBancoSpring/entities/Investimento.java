@@ -1,10 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,6 +10,8 @@ public class Investimento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idinvenstimento;
     private Date data;
+    @JoinColumn(name="idConta", referencedColumnName = "idconta")
+    private Conta fkIdConta;
     private double valor;
     private long idusuario;
     private long idtipoinv;
@@ -42,6 +41,14 @@ public class Investimento {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public Conta getFkIdConta() {
+        return fkIdConta;
+    }
+
+    public void setFkIdConta(Conta fkIdConta) {
+        this.fkIdConta = fkIdConta;
     }
 
     public double getValor() {

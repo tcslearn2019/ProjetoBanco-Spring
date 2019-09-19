@@ -48,4 +48,14 @@ public class InvestimentoController {
         return InvestimentoRepository.save(user);
     }
 
+    @PostMapping("/new-investiment")
+    public Object newInvestiment(@RequestBody Investimento investimento) {
+        Optional<Conta> conta = contaRepository.findById(investimento.getFkIdConta().getConta());
+        if(conta.get().getSaldo() < investimento.getValor()) {
+            return "Não possui saldo suficiente para realizar o investimento!";
+        } else {
+            return null;
+        }
+    }
+
 }
