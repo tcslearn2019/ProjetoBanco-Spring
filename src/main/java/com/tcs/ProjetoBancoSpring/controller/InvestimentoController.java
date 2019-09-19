@@ -1,7 +1,10 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
+import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
+import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
+import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,9 @@ public class InvestimentoController {
 
     @Autowired
     private InvestimentoRepository InvestimentoRepository;
+
+    @Autowired
+    private ContaRepository contaRepository;
 
     @GetMapping("/investiment")
     public List<Investimento> getUsers(){

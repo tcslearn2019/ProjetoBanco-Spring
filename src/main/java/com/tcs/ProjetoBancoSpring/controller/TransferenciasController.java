@@ -43,7 +43,8 @@ public class TransferenciasController {
         return true;
     }
 
-    @PutMapping("/transferencias") public Transferencias updateUser(@RequestBody Transferencias user){
+    @PutMapping("/transferencias")
+    public Transferencias updateUser(@RequestBody Transferencias user){
         return transferenciasRepository.save(user);
     }
 
@@ -58,8 +59,15 @@ public class TransferenciasController {
         System.out.println(paramTransf.getConta());
         System.out.println(paramTransf.getValor());
         System.out.println(paramTransf.getAgencia());
+        System.out.println(paramTransf.getIdOrigem());
+
         return true;
     }
+
+    private void Operacao(String idOrigem, String idDestino){
+
+    }
+
 
 }
 

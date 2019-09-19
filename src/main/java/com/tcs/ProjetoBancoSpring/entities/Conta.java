@@ -1,9 +1,8 @@
 package com.tcs.ProjetoBancoSpring.entities;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Conta {
@@ -11,7 +10,9 @@ public class Conta {
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
     private long idconta;
-    private long iduser;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
+    private User fk_iduser;
     private long conta;
     private long agencia;
     private long saldo;
@@ -19,19 +20,19 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(long iduser, long conta, long agencia, long saldo) {
-        this.iduser = iduser;
+    public Conta(User fk_iduser, long conta, long agencia, long saldo) {
+        this.fk_iduser = fk_iduser;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
     }
 
-    public long getIduser() {
-        return iduser;
+    public User getIduser() {
+        return fk_iduser;
     }
 
-    public void setIduser(long iduser) {
-        this.iduser = iduser;
+    public void setIduser(User iduser) {
+        this.fk_iduser = iduser;
     }
 
     public long getSaldo() {
@@ -50,6 +51,14 @@ public class Conta {
         this.idconta = idconta;
     }
 
+    public long getIdAgencia() {
+        return agencia;
+    }
+
+    public void setIdAgencia(long agencia) {
+        this.agencia = agencia;
+    }
+
     public long getConta() {
         return conta;
     }
@@ -58,20 +67,13 @@ public class Conta {
         this.conta = conta;
     }
 
-    public long getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(long agencia) {
-        this.agencia = agencia;
-    }
 
     @Override
     public String toString() {
         return "Conta{" +
                 "idconta=" + idconta +
-                ", conta=" + conta +
-                ", agencia=" + agencia +
+                ", conta=" + conta  +
+                ", agencia=" +
                 '}';
     }
 

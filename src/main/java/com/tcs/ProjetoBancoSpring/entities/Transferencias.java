@@ -11,7 +11,7 @@ public class Transferencias {
     @Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-    private long idemprestimo;
+    private long idEmprestimo;
     private long idContaOrigem;
     private long idContaDestino;
     private long valor;
@@ -43,12 +43,12 @@ public class Transferencias {
     }
 
 
-    public long getIdemprestimo() {
-        return idemprestimo;
+    public long getIdEmprestimo() {
+        return idEmprestimo;
     }
 
-    public void setIdemprestimo(long idemprestimo) {
-        this.idemprestimo = idemprestimo;
+    public void setIdEmprestimo(long idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
 
     public long getValor() {
