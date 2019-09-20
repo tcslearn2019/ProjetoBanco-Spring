@@ -44,8 +44,7 @@ public class ContaController {
 
     @PostMapping("/accountbalance")
     public Conta getValidation(@RequestBody Long id){
-        Optional<Conta> contaRetorno = contaRepository.findAll().stream().filter(conta -> conta.getFkIdUser().getId() == id).findFirst();
-        return contaRetorno.get();
+        return contaRepository.findAll().stream().filter(conta -> conta.getFkIdUser().getId() == id).findFirst().get();
     }
 
 }

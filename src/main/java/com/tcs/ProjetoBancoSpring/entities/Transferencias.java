@@ -68,5 +68,4 @@ public class Transferencias {
         this.dataTransferencia = dataTransferencia;
     }
 
-
 }

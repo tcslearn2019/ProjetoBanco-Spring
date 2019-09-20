@@ -69,7 +69,7 @@ public class TransferenciasController {
     }
 
     private boolean Operacao(long idOrigem, long idDestino, Double valorTransfer){
-        if(contaRepository.findById(idOrigem).get().getSaldo() >= valorTransfer){
+        if(contaRepository.findById(idOrigem).get().getSaldo() >= valorTransfer && valorTransfer > 0){
             Conta temporario = new Conta();
             temporario = contaRepository.findById(idDestino).get();
             temporario.setSaldo(temporario.getSaldo() + valorTransfer);
@@ -85,7 +85,6 @@ public class TransferenciasController {
             return false;
         }
     }
-
 
 }
 
