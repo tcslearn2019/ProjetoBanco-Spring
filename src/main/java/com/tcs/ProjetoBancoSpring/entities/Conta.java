@@ -1,5 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,8 +10,9 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idconta;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
+    @JsonIgnoreProperties("conta")
     private User fkIdUser;
     private long conta;
     private long agencia;
@@ -25,36 +28,20 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public User getIduser() {
-        return fkIdUser;
-    }
-
-    public void setIduser(User iduser) {
-        this.fkIdUser = iduser;
-    }
-
-    public long getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(long saldo) {
-        this.saldo = saldo;
-    }
-
     public Long getIdconta() {
         return idconta;
     }
 
-    public void setIdconta(long idconta) {
+    public void setIdconta(Long idconta) {
         this.idconta = idconta;
     }
 
-    public long getIdAgencia() {
-        return agencia;
+    public User getFkIdUser() {
+        return fkIdUser;
     }
 
-    public void setIdAgencia(long agencia) {
-        this.agencia = agencia;
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
     }
 
     public long getConta() {
@@ -65,6 +52,21 @@ public class Conta {
         this.conta = conta;
     }
 
+    public long getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(long agencia) {
+        this.agencia = agencia;
+    }
+
+    public long getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(long saldo) {
+        this.saldo = saldo;
+    }
 
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,9 @@ public class User {
     private String pwd;
     private String email;
     private String tel;
+    @OneToOne(mappedBy = "fkIdUser")
+    @JsonIgnoreProperties("fkIdUser")
+    private Conta conta;
 
     public User() {
 
@@ -90,6 +95,14 @@ public class User {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
     @Override
