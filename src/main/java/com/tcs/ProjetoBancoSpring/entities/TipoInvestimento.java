@@ -1,8 +1,5 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

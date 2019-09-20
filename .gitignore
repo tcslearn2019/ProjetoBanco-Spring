@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.user_db_mb.db
 
 ### IntelliJ IDEA ###
 .idea
@@ -29,4 +30,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/java/com/tcs/ProjetoBancoSpring/Threads/CalculaJurosEmprestimos.java
+

@@ -1,13 +1,13 @@
 package com.tcs.ProjetoBancoSpring.entities;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idconta;
+    private Long idconta;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
     private User fkIdUser;
@@ -41,7 +41,7 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public long getIdconta() {
+    public Long getIdconta() {
         return idconta;
     }
 
@@ -92,5 +92,16 @@ public class Conta {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conta conta = (Conta) o;
+        return idconta == conta.idconta;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idconta);
+    }
 }
