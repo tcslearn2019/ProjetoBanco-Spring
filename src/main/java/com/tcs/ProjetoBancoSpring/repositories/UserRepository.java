@@ -4,8 +4,11 @@ import com.tcs.ProjetoBancoSpring.entities.User;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public interface UserRepository extends JpaRepository<User, Long> {
-    public User findByPwd(String pwd);
-    public User findByCpf(String cpf);
+
+    Optional<User> findByCpfAndPwd(String cpf, String pwd);
+
 }
