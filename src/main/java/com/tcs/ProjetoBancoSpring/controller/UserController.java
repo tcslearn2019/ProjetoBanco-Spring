@@ -49,7 +49,6 @@ public class UserController {
         List<User> Usuarios = getUsers();
         for(User i : Usuarios){
             if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {
-                System.out.println(i.getFname());
                 return i;
             }
         }

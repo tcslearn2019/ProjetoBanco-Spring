@@ -21,8 +21,9 @@ import java.util.List;
 @EnableScheduling
 @SpringBootApplication
 public class ProjetoBancoSpringApplication implements CommandLineRunner {
+
     @Autowired
-    private EmprestimoRepository EmprestimoRepository;
+    private com.tcs.ProjetoBancoSpring.repositories.EmprestimoRepository EmprestimoRepository;
 
     public static void main(String[] args) {
 		SpringApplication.run(ProjetoBancoSpringApplication.class, args);
@@ -30,21 +31,6 @@ public class ProjetoBancoSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    }
-
-
-    @Scheduled(cron = "0 0/1 * * * ?")
-    public void teste() {
-        System.out.println("Entrando!");
-        calcularJuros(EmprestimoRepository.findAll());
-    }
-
-    private void calcularJuros(List<Emprestimo> listRepository){
-        for(Emprestimo i : listRepository){
-            i.setValorPagar((i.getValorPagar() * 0.25) + i.getValorPagar());
-            EmprestimoRepository.save(i);
-        }
-        System.out.println("Recalculando");
 
     }
 

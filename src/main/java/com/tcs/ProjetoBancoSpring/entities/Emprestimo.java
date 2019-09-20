@@ -21,11 +21,12 @@ public class Emprestimo {
 
     }
 
-    public Emprestimo(User fkIdUser, Date dataEmprestimo, double juros, double valorPagar, double valorEmprestimo) {
+    public Emprestimo(User fkIdUser, Date dataEmprestimo, double juros, double valorEmprestimo) {
         this.fkIdUser = fkIdUser;
         this.dataEmprestimo = dataEmprestimo;
         this.juros = juros;
         this.valorEmprestimo = valorEmprestimo;
+        this.valorPagar = valorEmprestimo;
     }
 
     public long getIdEmprestimo() {
