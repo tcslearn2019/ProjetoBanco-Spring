@@ -1,14 +1,11 @@
 
 package com.tcs.ProjetoBancoSpring;
 
-import com.tcs.ProjetoBancoSpring.entities.*;
 import com.tcs.ProjetoBancoSpring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class ProjetoBancoSpringApplication implements CommandLineRunner {
