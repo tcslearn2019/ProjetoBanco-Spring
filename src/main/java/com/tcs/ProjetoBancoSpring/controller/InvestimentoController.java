@@ -59,8 +59,13 @@ public class InvestimentoController {
         return investimentoService.newInvestiment(investimento);
     }
 
-    @PostMapping("/refound-investiment")
-    public Object refoundInvetiment(@RequestBody long investimento, Double valorRefound) {
-        return investimentoService.refoundInvestiment(investimento, valorRefound);
+    @PostMapping("/refound-investiment/{idinvenstimento}")
+    public Object refoundInvetiment(@PathVariable("idinvenstimento") Long idinvenstimento, @RequestParam Double valorRefound) {
+        return investimentoService.refoundInvestiment(idinvenstimento, valorRefound);
+    }
+
+    @PostMapping("add-investiment/{idinvestimento}")
+    public Object addInvestiment(@PathVariable("idinvestimento") Long idinvestimento, @RequestParam Double attValorInv) {
+        return investimentoService.addInvestiment(idinvestimento, attValorInv);
     }
 }
