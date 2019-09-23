@@ -16,21 +16,26 @@ public class User {
     private String pwd;
     private String email;
     private String tel;
+<<<<<<< HEAD
     @OneToOne(mappedBy = "fkIdUser")
     @JsonIgnoreProperties("fkIdUser")
     private Conta conta;
+=======
+    private String rg;
+>>>>>>> origin/Guilherme
 
     public User() {
 
     }
 
-    public User(String fname, String lname, String cpf, String pwd, String email, String tel) {
+    public User(String fname, String lname, String cpf, String pwd, String email, String tel, String rg) {
         this.fname = fname;
         this.lname = lname;
         this.cpf = cpf;
         this.pwd = pwd;
         this.email = email;
         this.tel = tel;
+        this.rg = rg;
     }
     public User(Long id, String fname, String lname, String cpf, String pwd, String email, String tel) {
         this.id = id;
@@ -97,12 +102,21 @@ public class User {
         this.tel = tel;
     }
 
+<<<<<<< HEAD
     public Conta getConta() {
         return conta;
     }
 
     public void setConta(Conta conta) {
         this.conta = conta;
+=======
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+>>>>>>> origin/Guilherme
     }
 
     @Override

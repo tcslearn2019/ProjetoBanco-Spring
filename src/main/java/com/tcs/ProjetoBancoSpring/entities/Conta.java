@@ -16,7 +16,7 @@ public class Conta {
     private User fkIdUser;
     private long conta;
     private long agencia;
-    private long saldo;
+    private double saldo;
 
     public Conta() {
     }
@@ -36,12 +36,21 @@ public class Conta {
         this.idconta = idconta;
     }
 
+<<<<<<< HEAD
     public User getFkIdUser() {
         return fkIdUser;
     }
 
     public void setFkIdUser(User fkIdUser) {
         this.fkIdUser = fkIdUser;
+=======
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+>>>>>>> origin/Guilherme
     }
 
     public long getConta() {
@@ -68,12 +77,33 @@ public class Conta {
         this.saldo = saldo;
     }
 
+<<<<<<< HEAD
+=======
+    public User getFkIdUser() {
+        return fkIdUser;
+    }
+
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
+    }
+
+    public long getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(long agencia) {
+        this.agencia = agencia;
+    }
+
+>>>>>>> origin/Guilherme
     @Override
     public String toString() {
         return "Conta{" +
                 "idconta=" + idconta +
                 ", conta=" + conta  +
-                ", agencia=" +
+                ", agencia=" + agencia +
+                ", saldo=" + saldo +
+                ", idOrigemUsuario=" + fkIdUser.getId() +
                 '}';
     }
 

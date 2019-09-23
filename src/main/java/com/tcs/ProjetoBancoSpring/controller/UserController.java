@@ -1,5 +1,7 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
+import com.tcs.ProjetoBancoSpring.entities.Conta;
+import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
 import com.tcs.ProjetoBancoSpring.services.UserService;
 import org.springframework.context.ApplicationContext;
@@ -10,16 +12,22 @@ import com.tcs.ProjetoBancoSpring.entities.User;
 import com.tcs.ProjetoBancoSpring.entities.Login;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/banco")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*" )
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
+<<<<<<< HEAD
     private UserService userService;
+=======
+    private ContaRepository contaRepository;
+>>>>>>> origin/Guilherme
 
     @GetMapping("/users")
     public List<User> getUsers(){
@@ -45,11 +53,24 @@ public class UserController {
 
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
+        Random rd = new Random();
+        contaRepository.save(new Conta(user,rd.nextInt(999999),4570,0));
         return userRepository.save(user);
     }
 
     @PostMapping("/validation")
     public User getValidation(@RequestBody Login login){
+<<<<<<< HEAD
         return userService.login(login);
+=======
+        List<User> Usuarios = getUsers();
+        for(User i : Usuarios){
+            if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {
+                return i;
+            }
+        }
+        Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
+        return null;
+>>>>>>> origin/Guilherme
     }
 }

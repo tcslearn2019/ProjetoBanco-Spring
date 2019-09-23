@@ -42,4 +42,9 @@ public class ContaController {
         return contaRepository.save(user);
     }
 
+    @PostMapping("/accountbalance")
+    public Conta getValidation(@RequestBody Long id){
+        return contaRepository.findAll().stream().filter(conta -> conta.getFkIdUser().getId() == id).findFirst().get();
+    }
+
 }
