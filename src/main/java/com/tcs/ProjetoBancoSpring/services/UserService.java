@@ -3,6 +3,7 @@ package com.tcs.ProjetoBancoSpring.services;
 import com.tcs.ProjetoBancoSpring.entities.Login;
 import com.tcs.ProjetoBancoSpring.entities.User;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
+import com.tcs.ProjetoBancoSpring.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public User login(Login login) {
-        return userRepository.findByCpfAndPwd(login.getLogin(), login.getPwd()).orElse(null);
+        return userRepository.findByCpfAndPwd(login.getLogin(), login.getPwd())
+                .orElseThrow(()-> new ObjectNotFoundException("Usuário não encontrado!"));
     }
 }
