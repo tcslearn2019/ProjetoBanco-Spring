@@ -52,12 +52,12 @@ public class EmprestimoController {
     @PostMapping("/loan")
     public Emprestimo createEmprestimo(@RequestBody ParamEmprestimo paramEmprestimo){
         if(Double.parseDouble(paramEmprestimo.getValor()) > 0) {
-            Optional<User> a = userRepository.findById(Long.parseLong(paramEmprestimo.getIdOrigem()));
+            Optional<User> userTemp = userRepository.findById(Long.parseLong(paramEmprestimo.getIdOrigem()));
             Optional<Conta> destino = contaRepository.findAll().stream().filter(conta ->
-                    conta.getFkIdUser().getId() == a.get().getId()).findFirst();
+                    conta.getFkIdUser().getId() == userTemp.get().getId()).findFirst();
             destino.get().setSaldo(destino.get().getSaldo() + Double.parseDouble(paramEmprestimo.getValor()));
             contaRepository.save(destino.get());
-            return emprestimoRepository.save(new Emprestimo(a.get(), new Date(System.currentTimeMillis()), 2.5, Double.parseDouble(paramEmprestimo.getValor()), false));
+            return emprestimoRepository.save(new Emprestimo(userTemp.get(), new Date(System.currentTimeMillis()), 2.5, Double.parseDouble(paramEmprestimo.getValor()), false));
         }else{
             return null;
         }
