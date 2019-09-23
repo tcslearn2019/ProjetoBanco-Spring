@@ -16,12 +16,12 @@ public class Conta {
     private User fkIdUser;
     private long conta;
     private long agencia;
-    private long saldo;
+    private double saldo;
 
     public Conta() {
     }
 
-    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+    public Conta(User fkIdUser, long conta, long agencia, double saldo) {
         this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
@@ -60,11 +60,11 @@ public class Conta {
         this.agencia = agencia;
     }
 
-    public long getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

@@ -1,8 +1,6 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
-import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
-import com.tcs.ProjetoBancoSpring.entities.TipoInvestimento;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import com.tcs.ProjetoBancoSpring.repositories.TipoInvestimentoRepository;
@@ -59,5 +57,10 @@ public class InvestimentoController {
     @PostMapping("/new-investiment")
     public Object newInvestiment(@RequestBody Investimento investimento) {
         return investimentoService.newInvestiment(investimento);
+    }
+
+    @PostMapping("/refound-investiment")
+    public Object refoundInvetiment(@RequestBody long investimento, Double valorRefound) {
+        return investimentoService.refoundInvestiment(investimento, valorRefound);
     }
 }
