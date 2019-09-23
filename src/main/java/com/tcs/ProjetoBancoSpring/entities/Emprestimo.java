@@ -15,18 +15,21 @@ public class Emprestimo {
     private double juros;
     private double valorEmprestimo;
     private double valorPagar;
+    private boolean pago;
+    private Date dataPagamento;
 
 
     public Emprestimo(){
 
     }
 
-    public Emprestimo(User fkIdUser, Date dataEmprestimo, double juros, double valorEmprestimo) {
+    public Emprestimo(User fkIdUser, Date dataEmprestimo, double juros, double valorEmprestimo, boolean pago) {
         this.fkIdUser = fkIdUser;
         this.dataEmprestimo = dataEmprestimo;
         this.juros = juros;
         this.valorEmprestimo = valorEmprestimo;
         this.valorPagar = valorEmprestimo;
+        this.pago = pago;
     }
 
     public long getIdEmprestimo() {
@@ -88,5 +91,20 @@ public class Emprestimo {
                 '}';
     }
 
+    public boolean isPago() {
+        return pago;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
 
 }
