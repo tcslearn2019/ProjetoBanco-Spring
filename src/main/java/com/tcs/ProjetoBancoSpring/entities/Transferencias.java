@@ -1,17 +1,15 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Transferencias {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    private long idemprestimo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idEmprestimo;
     private long idContaOrigem;
     private long idContaDestino;
     private long valor;
@@ -43,12 +41,12 @@ public class Transferencias {
     }
 
 
-    public long getIdemprestimo() {
-        return idemprestimo;
+    public long getIdEmprestimo() {
+        return idEmprestimo;
     }
 
-    public void setIdemprestimo(long idemprestimo) {
-        this.idemprestimo = idemprestimo;
+    public void setIdEmprestimo(long idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
 
     public long getValor() {

@@ -1,17 +1,19 @@
 package com.tcs.ProjetoBancoSpring.entities;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Conta {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    private long idconta;
-    private long iduser;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idconta;
+    @OneToOne
+    @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
+    @JsonIgnoreProperties("conta")
+    private User fkIdUser;
     private long conta;
     private long agencia;
     private long saldo;
@@ -19,35 +21,27 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(long iduser, long conta, long agencia, long saldo) {
-        this.iduser = iduser;
+    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+        this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
     }
 
-    public long getIduser() {
-        return iduser;
-    }
-
-    public void setIduser(long iduser) {
-        this.iduser = iduser;
-    }
-
-    public long getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(long saldo) {
-        this.saldo = saldo;
-    }
-
-    public long getIdconta() {
+    public Long getIdconta() {
         return idconta;
     }
 
-    public void setIdconta(long idconta) {
+    public void setIdconta(Long idconta) {
         this.idconta = idconta;
+    }
+
+    public User getFkIdUser() {
+        return fkIdUser;
+    }
+
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
     }
 
     public long getConta() {
@@ -66,14 +60,33 @@ public class Conta {
         this.agencia = agencia;
     }
 
+    public long getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(long saldo) {
+        this.saldo = saldo;
+    }
+
     @Override
     public String toString() {
         return "Conta{" +
                 "idconta=" + idconta +
-                ", conta=" + conta +
-                ", agencia=" + agencia +
+                ", conta=" + conta  +
+                ", agencia=" +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conta conta = (Conta) o;
+        return idconta == conta.idconta;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idconta);
+    }
 }

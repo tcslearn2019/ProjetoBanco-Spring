@@ -1,6 +1,7 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
+import com.tcs.ProjetoBancoSpring.services.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/users")
     public List<User> getUsers(){
@@ -46,17 +50,6 @@ public class UserController {
 
     @PostMapping("/validation")
     public User getValidation(@RequestBody Login login){
-        List<User> Usuarios = getUsers();
-        for(User i : Usuarios){
-            if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {
-                System.out.println(i.getFname());
-                return i;
-            }
-        }
-        System.out.println("--------------------");
-        Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
-
-
-        return null;
+        return userService.login(login);
     }
 }

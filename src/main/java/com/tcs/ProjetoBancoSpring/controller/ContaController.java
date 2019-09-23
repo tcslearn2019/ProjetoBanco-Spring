@@ -17,28 +17,28 @@ public class ContaController {
     private ContaRepository contaRepository;
 
     @GetMapping("/account")
-    public List<Conta> getUsers(){
+    public List<Conta> getContas(){
         return contaRepository.findAll();
     }
 
     @GetMapping("/account/{id}")
-    public Conta getUser(@PathVariable Long id){
+    public Conta getConta(@PathVariable Long id){
         Optional<Conta> optionalUser = contaRepository.findById(id);
         return optionalUser.get();
     }
 
     @DeleteMapping("/account/{id}")
-    public boolean deleteUser(@PathVariable Long id){
+    public boolean deleteConta(@PathVariable Long id){
         contaRepository.deleteById(id);
         return true;
     }
 
-    @PutMapping("/account") public Conta updateUser(@RequestBody Conta user){
+    @PutMapping("/account") public Conta updateConta(@RequestBody Conta user){
         return contaRepository.save(user);
     }
 
     @PostMapping("/account")
-    public Conta createUser(@RequestBody Conta user){
+    public Conta createConta(@RequestBody Conta user){
         return contaRepository.save(user);
     }
 
