@@ -1,10 +1,11 @@
 package com.tcs.ProjetoBancoSpring.repositories;
 
-import com.tcs.ProjetoBancoSpring.entities.Conta;
+import com.tcs.ProjetoBancoSpring.entities.Emprestimo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @SpringBootApplication
-public interface ContaRepository extends JpaRepository<Conta, Long>{
-    
+public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
+
+
 }

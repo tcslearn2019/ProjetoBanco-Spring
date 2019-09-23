@@ -1,29 +1,30 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Transferencias {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    private long idemprestimo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idTransferencias;
     private long idContaOrigem;
     private long idContaDestino;
-    private long valor;
+    private double valor;
+    private Date dataTransferencia;
 
     public Transferencias(){
 
     }
 
-    public Transferencias(long idContaOrigem, long idContaDestino, long valor) {
+    public Transferencias(long idContaOrigem, long idContaDestino, double valor, Date dataTransferencia) {
         this.idContaOrigem = idContaOrigem;
         this.idContaDestino = idContaDestino;
         this.valor = valor;
+        this.dataTransferencia = dataTransferencia;
     }
 
     public long getIdContaOrigem() {
@@ -43,21 +44,28 @@ public class Transferencias {
     }
 
 
-    public long getIdemprestimo() {
-        return idemprestimo;
+    public long getIdTransferencias() {
+        return idTransferencias;
     }
 
-    public void setIdemprestimo(long idemprestimo) {
-        this.idemprestimo = idemprestimo;
+    public void setIdTransferencias(long idTransferencias) {
+        this.idTransferencias = idTransferencias;
     }
 
-    public long getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(long valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
+    public Date getDataTransferencia() {
+        return dataTransferencia;
+    }
+
+    public void setDataTransferencia(Date dataTransferencia) {
+        this.dataTransferencia = dataTransferencia;
+    }
 
 }

@@ -1,17 +1,14 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class TipoInvestimento {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idinv;
     private String nome;
     private double juros;

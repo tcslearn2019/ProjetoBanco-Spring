@@ -1,53 +1,60 @@
 package com.tcs.ProjetoBancoSpring.entities;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Conta {
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    private long idconta;
-    private long iduser;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idconta;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
+    private User fkIdUser;
     private long conta;
     private long agencia;
-    private long saldo;
+    private double saldo;
 
     public Conta() {
     }
 
-    public Conta(long iduser, long conta, long agencia, long saldo) {
-        this.iduser = iduser;
+    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+        this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
     }
 
-    public long getIduser() {
-        return iduser;
+    public User getIduser() {
+        return fkIdUser;
     }
 
-    public void setIduser(long iduser) {
-        this.iduser = iduser;
+    public void setIduser(User iduser) {
+        this.fkIdUser = iduser;
     }
 
-    public long getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    public long getIdconta() {
+    public Long getIdconta() {
         return idconta;
     }
 
     public void setIdconta(long idconta) {
         this.idconta = idconta;
+    }
+
+    public long getIdAgencia() {
+        return agencia;
+    }
+
+    public void setIdAgencia(long agencia) {
+        this.agencia = agencia;
     }
 
     public long getConta() {
@@ -56,6 +63,14 @@ public class Conta {
 
     public void setConta(long conta) {
         this.conta = conta;
+    }
+
+    public User getFkIdUser() {
+        return fkIdUser;
+    }
+
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
     }
 
     public long getAgencia() {
@@ -70,10 +85,23 @@ public class Conta {
     public String toString() {
         return "Conta{" +
                 "idconta=" + idconta +
-                ", conta=" + conta +
+                ", conta=" + conta  +
                 ", agencia=" + agencia +
+                ", saldo=" + saldo +
+                ", idOrigemUsuario=" + fkIdUser.getId() +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conta conta = (Conta) o;
+        return idconta == conta.idconta;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idconta);
+    }
 }
