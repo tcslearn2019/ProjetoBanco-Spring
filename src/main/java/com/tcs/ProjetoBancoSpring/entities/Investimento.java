@@ -17,18 +17,14 @@ public class Investimento {
     private TipoInvestimento fkIdTipoInvestimento;
     private double valor;
     private double valorTemp;
-    private long idusuario;
-    private long idtipoinv;
 
     public Investimento() {
     }
 
-    public Investimento(Date data, double valor, double valorTemp, long idusuario, long idtipoinv) {
+    public Investimento(Date data, double valor, double valorTemp) {
         this.data = data;
         this.valor = valor;
         this.valorTemp = valorTemp;
-        this.idusuario = idusuario;
-        this.idtipoinv = idtipoinv;
     }
 
     public long getIdinvenstimento() {
@@ -71,22 +67,6 @@ public class Investimento {
         this.valorTemp = valorTemp;
     }
 
-    public long getIdusuario() {
-        return idusuario;
-    }
-
-    public void setIdusuario(long idusuario) {
-        this.idusuario = idusuario;
-    }
-
-    public long getIdtipoinv() {
-        return idtipoinv;
-    }
-
-    public void setIdtipoinv(long idtipoinv) {
-        this.idtipoinv = idtipoinv;
-    }
-
 
     @Override
     public String toString() {
@@ -94,8 +74,6 @@ public class Investimento {
                 "idinvenstimento=" + idinvenstimento +
                 ", data=" + data +
                 ", valor=" + valor +
-                ", idusuario=" + idusuario +
-                ", idtipoinv=" + idtipoinv +
                 '}';
     }
 

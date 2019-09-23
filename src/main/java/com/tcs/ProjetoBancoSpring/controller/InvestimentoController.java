@@ -1,6 +1,7 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
+import com.tcs.ProjetoBancoSpring.entities.ParamInvestimento;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import com.tcs.ProjetoBancoSpring.repositories.TipoInvestimentoRepository;
@@ -53,6 +54,13 @@ public class InvestimentoController {
     public Investimento createInvestimento(@RequestBody Investimento user){
         return InvestimentoRepository.save(user);
     }
+
+    @PostMapping("/investimentnew")
+    public boolean getValidation(@RequestBody ParamInvestimento paramInvestimento){
+        System.out.println(paramInvestimento.getIdInvestimento() + " " + paramInvestimento.getValor());
+        return false;
+    }
+
 
     @PostMapping("/new-investiment")
     public Object newInvestiment(@RequestBody Investimento investimento) {

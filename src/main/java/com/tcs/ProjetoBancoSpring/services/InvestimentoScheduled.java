@@ -23,7 +23,8 @@ public class InvestimentoScheduled {
         investimentos.forEach(investimento -> {
             double juros = investimento.getFkIdTipoInvestimento().getJuros();
             double valor = (investimento.getValor() / 100) * juros;
-            investimento.setValorTemp(investimento.getValor() + valor);
+            investimento.setValorTemp(investimento.getValorTemp() + valor);
+            investimentoRepository.save(investimento);
         });
 
     }
