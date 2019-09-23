@@ -1,7 +1,6 @@
 package com.tcs.ProjetoBancoSpring.services;
 
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
-import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;

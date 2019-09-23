@@ -3,6 +3,7 @@ package com.tcs.ProjetoBancoSpring.controller;
 import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
+import com.tcs.ProjetoBancoSpring.services.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class UserController {
 
     @Autowired
     private ContaRepository contaRepository;
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/users")
     public List<User> getUsers(){
@@ -49,8 +54,9 @@ public class UserController {
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         Random rd = new Random();
+        userRepository.save(user);
         contaRepository.save(new Conta(user,rd.nextInt(999999),4570,0));
-        return userRepository.save(user);
+        return user;
     }
 
     @PostMapping("/validation")
@@ -62,6 +68,6 @@ public class UserController {
             }
         }
         Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
-        return null;
+        return userService.login(login);
     }
 }
