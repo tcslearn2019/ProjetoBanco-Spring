@@ -17,4 +17,8 @@ public class UserService {
     public User login(Login login) {
         return userRepository.findByCpfAndPwd(login.getLogin(), login.getPwd()).orElse(null);
     }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

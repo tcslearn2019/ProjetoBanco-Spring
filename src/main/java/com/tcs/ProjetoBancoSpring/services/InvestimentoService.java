@@ -52,7 +52,7 @@ public class InvestimentoService {
     }
 
     public boolean createInvestiment(ParamInvestimento paramInvestimento) {
-        Conta conta = contaService.findByIdUser(paramInvestimento.getIduser());
+        Conta conta = contaService.findByUserId(paramInvestimento.getIduser());
 
         if (validateInvestiment(paramInvestimento, conta)) {
             TipoInvestimento tipoInvestimento = tipoInvestimentoService.findById(paramInvestimento.getIdinv());

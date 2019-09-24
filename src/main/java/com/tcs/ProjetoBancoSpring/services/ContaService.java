@@ -24,10 +24,6 @@ public class ContaService {
         return repository.findById(id).orElse(null);
     }
 
-    public Conta findByIdUser(Long id) {
-        return repository.findByFkIdUserId(id);
-    }
-
     public Conta save(Conta conta) {
         return repository.save(conta);
     }

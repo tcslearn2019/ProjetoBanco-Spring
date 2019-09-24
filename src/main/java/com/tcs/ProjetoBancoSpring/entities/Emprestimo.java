@@ -8,8 +8,8 @@ public class Emprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEmprestimo;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "iduser", referencedColumnName = "id", unique = false)
+    @OneToOne
+    @JoinColumn(name = "iduser", referencedColumnName = "id")
     private User fkIdUser;
     private Date dataEmprestimo;
     private double juros;
