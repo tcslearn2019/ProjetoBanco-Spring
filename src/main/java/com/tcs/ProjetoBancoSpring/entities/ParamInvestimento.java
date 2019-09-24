@@ -3,18 +3,11 @@ package com.tcs.ProjetoBancoSpring.entities;
 public class ParamInvestimento {
     private double juros;
     private String nome;
-    private long idinv;
+    private Long idinv;
     private double valor;
-    private long iduser;
+    private Long iduser;
 
     public ParamInvestimento(){
-
-    }
-
-    public ParamInvestimento(double juros, long idinv, String nome, long valor) {
-        this.juros = juros;
-        this.idinv = idinv;
-        this.nome = nome;
     }
 
     public double getJuros() {
@@ -25,11 +18,11 @@ public class ParamInvestimento {
         this.juros = juros;
     }
 
-    public long getIdinv() {
+    public Long getIdinv() {
         return idinv;
     }
 
-    public void setIdinv(long idinv) {
+    public void setIdinv(Long idinv) {
         this.idinv = idinv;
     }
 
@@ -49,11 +42,11 @@ public class ParamInvestimento {
         this.valor = valor;
     }
 
-    public long getIduser() {
+    public Long getIduser() {
         return iduser;
     }
 
-    public void setIduser(long iduser) {
+    public void setIduser(Long iduser) {
         this.iduser = iduser;
     }
 

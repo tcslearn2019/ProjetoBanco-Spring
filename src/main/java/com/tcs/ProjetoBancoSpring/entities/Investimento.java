@@ -7,10 +7,10 @@ import java.util.Date;
 public class Investimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idinvenstimento;
+    private Long id;
     private Date data;
     @ManyToOne
-    @JoinColumn(name="idconta", referencedColumnName = "idconta")
+    @JoinColumn(name = "idconta", referencedColumnName = "idconta")
     private Conta fkIdConta;
     @OneToOne
     @JoinColumn(name = "idTipInv", referencedColumnName = "idinv")
@@ -21,23 +21,28 @@ public class Investimento {
     private boolean ativo;
 
     public Investimento() {
+        this.data = new Date(System.currentTimeMillis());
+        this.ativo = true;
     }
 
-    public Investimento(Date data,Conta fkIdConta,TipoInvestimento fkIdTipoInvestimento,double valor, double valorTemp, boolean ativo) {
+
+    public Investimento(Long id, Date data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, double valor, double valorTemp, Date dataResgate, boolean ativo) {
+        this.id = id;
         this.data = data;
         this.fkIdConta = fkIdConta;
         this.fkIdTipoInvestimento = fkIdTipoInvestimento;
         this.valor = valor;
         this.valorTemp = valorTemp;
+        this.dataResgate = dataResgate;
         this.ativo = ativo;
     }
 
-    public long getIdinvenstimento() {
-        return idinvenstimento;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdinvenstimento(long idinvenstimento) {
-        this.idinvenstimento = idinvenstimento;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getData() {
@@ -48,13 +53,21 @@ public class Investimento {
         this.data = data;
     }
 
-    public Conta getFkIdConta() { return fkIdConta; }
+    public Conta getFkIdConta() {
+        return fkIdConta;
+    }
 
-    public void setFkIdConta(Conta fkIdConta) { this.fkIdConta = fkIdConta; }
+    public void setFkIdConta(Conta fkIdConta) {
+        this.fkIdConta = fkIdConta;
+    }
 
-    public TipoInvestimento getFkIdTipoInvestimento() { return fkIdTipoInvestimento; }
+    public TipoInvestimento getFkIdTipoInvestimento() {
+        return fkIdTipoInvestimento;
+    }
 
-    public void setFkIdTipoInvestimento(TipoInvestimento fkIdTipoInvestimento) { this.fkIdTipoInvestimento = fkIdTipoInvestimento; }
+    public void setFkIdTipoInvestimento(TipoInvestimento fkIdTipoInvestimento) {
+        this.fkIdTipoInvestimento = fkIdTipoInvestimento;
+    }
 
     public double getValor() {
         return valor;
@@ -91,7 +104,7 @@ public class Investimento {
     @Override
     public String toString() {
         return "Investimento{" +
-                "idinvenstimento=" + idinvenstimento +
+                "id=" + id +
                 ", data=" + data +
                 ", fkIdConta=" + fkIdConta +
                 ", fkIdTipoInvestimento=" + fkIdTipoInvestimento +
@@ -100,5 +113,6 @@ public class Investimento {
                 ", ativo=" + ativo +
                 '}';
     }
+
 
 }

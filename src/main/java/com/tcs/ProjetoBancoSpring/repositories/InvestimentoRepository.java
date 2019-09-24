@@ -14,4 +14,5 @@ public interface InvestimentoRepository extends JpaRepository<Investimento, Long
 
     List<Investimento> findAllByFkIdTipoInvestimento(TipoInvestimento nome);
 
+    List<Investimento> findByFkIdContaFkIdUserIdAndAtivo(Long id, Boolean ativo);
 }
