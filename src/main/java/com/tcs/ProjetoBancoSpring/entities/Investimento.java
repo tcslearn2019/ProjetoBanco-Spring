@@ -1,5 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
+import com.tcs.ProjetoBancoSpring.services.exception.InvestimentoException;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -101,4 +103,9 @@ public class Investimento {
                 '}';
     }
 
+    public void validateRefound(Double valorRefound) {
+        if (this.getValorTemp() < valorRefound) {
+            throw new InvestimentoException("Não possui saldo suficiente para receber o valor do investimento!");
+        }
+    }
 }

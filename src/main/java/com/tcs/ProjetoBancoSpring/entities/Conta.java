@@ -1,6 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tcs.ProjetoBancoSpring.services.exception.InvestimentoException;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -92,5 +93,11 @@ public class Conta {
     @Override
     public int hashCode() {
         return Objects.hash(idconta);
+    }
+
+    public void validarSaldoParaInvestimento(double valor) {
+        if (this.getSaldo() < valor) {
+            throw new InvestimentoException("Não possui saldo suficiente para realizar o investimento!");
+        }
     }
 }
