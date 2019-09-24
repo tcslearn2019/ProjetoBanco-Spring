@@ -21,10 +21,12 @@ public class InvestimentoScheduled {
         List<Investimento> investimentos = investimentoRepository.findAll();
 
         investimentos.forEach(investimento -> {
-            double juros = investimento.getFkIdTipoInvestimento().getJuros();
-            double valor = (investimento.getValor() / 100) * juros;
-            investimento.setValorTemp(investimento.getValorTemp() + valor);
-            investimentoRepository.save(investimento);
+            if(investimento.isAtivo()) {
+                double juros = investimento.getFkIdTipoInvestimento().getJuros();
+                double valor = (investimento.getValor() / 100) * juros;
+                investimento.setValorTemp(investimento.getValorTemp() + valor);
+                investimentoRepository.save(investimento);
+            }
         });
 
     }

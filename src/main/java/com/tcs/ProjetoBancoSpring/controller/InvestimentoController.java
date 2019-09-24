@@ -1,16 +1,18 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
+import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
 import com.tcs.ProjetoBancoSpring.entities.ParamInvestimento;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import com.tcs.ProjetoBancoSpring.repositories.TipoInvestimentoRepository;
-import com.tcs.ProjetoBancoSpring.services.InvestimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/banco")
@@ -18,7 +20,7 @@ import java.util.Optional;
 public class InvestimentoController {
 
     @Autowired
-    private InvestimentoRepository InvestimentoRepository;
+    private InvestimentoRepository investimentoRepository;
 
     @Autowired
     private ContaRepository contaRepository;
@@ -26,54 +28,69 @@ public class InvestimentoController {
     @Autowired
     private TipoInvestimentoRepository tipoInvestimentoRepository;
 
-    @Autowired
-    private InvestimentoService investimentoService;
 
     @GetMapping("/investiment")
     public List<Investimento> getInvestimentos(){
-        return InvestimentoRepository.findAll();
+        return investimentoRepository.findAll();
     }
 
     @GetMapping("/investiment/{id}")
     public Investimento getInvestimento(@PathVariable Long id){
-        Optional<Investimento> optionalUser = InvestimentoRepository.findById(id);
+        Optional<Investimento> optionalUser = investimentoRepository.findById(id);
         return optionalUser.get();
     }
 
     @DeleteMapping("/investiment/{id}")
     public boolean deleteInvestimento(@PathVariable Long id){
-        InvestimentoRepository.deleteById(id);
+        investimentoRepository.deleteById(id);
         return true;
     }
 
     @PutMapping("/investiment") public Investimento updateInvestimento(@RequestBody Investimento user){
-        return InvestimentoRepository.save(user);
-    }
-
-    @PostMapping("/investiment")
-    public Investimento createInvestimento(@RequestBody Investimento user){
-        return InvestimentoRepository.save(user);
+        return investimentoRepository.save(user);
     }
 
     @PostMapping("/investimentnew")
     public boolean getValidation(@RequestBody ParamInvestimento paramInvestimento){
-        System.out.println(paramInvestimento.getIdInvestimento() + " " + paramInvestimento.getValor());
-        return false;
+        Optional <Conta> contaUser = contaRepository.findAll().stream().filter(idConta ->
+                idConta.getFkIdUser().getId() == paramInvestimento.getIduser()).findFirst();
+
+
+        if(contaUser.get().getSaldo() >= paramInvestimento.getValor() && paramInvestimento.getValor() > 0){
+                investimentoRepository.save(new Investimento(new Date(System.currentTimeMillis()),
+                    contaUser.get(), tipoInvestimentoRepository.findById(paramInvestimento.getIdinv()).get(),
+                        paramInvestimento.getValor(), paramInvestimento.getValor() , true));
+                contaUser.get().setSaldo(contaUser.get().getSaldo() - paramInvestimento.getValor());
+            contaRepository.save(contaUser.get());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @PostMapping("/investimentbyid")
+    public List<Investimento> getListInvestimento(@RequestBody Long id){
+        List<Investimento> listaEmprestimos = investimentoRepository.findAll().stream().filter(idInvestimento -> idInvestimento.getFkIdConta().getFkIdUser().getId() == id && idInvestimento.isAtivo()).collect(Collectors.toList());
+        return listaEmprestimos;
+    }
+
+    @PostMapping("/investimentbyidresgatados")
+    public List<Investimento> getListInvestimentoResgatados(@RequestBody Long id){
+        List<Investimento> listaEmprestimos = investimentoRepository.findAll().stream().filter(idInvestimento -> idInvestimento.getFkIdConta().getFkIdUser().getId() == id && !idInvestimento.isAtivo()).collect(Collectors.toList());
+        return listaEmprestimos;
+    }
+
+    @PostMapping("/resgateinvestimentbyid")
+    public boolean updateInvestimentoById(@RequestBody Investimento investimento){
+        investimento.setAtivo(false);
+        investimento.setDataResgate(new Date(System.currentTimeMillis()));
+        investimentoRepository.save(investimento);
+        Optional <Conta> contaInvestimento = contaRepository.findById(investimento.getFkIdConta().getIdconta());
+        contaInvestimento.get().setSaldo(investimento.getValorTemp() + contaInvestimento.get().getSaldo());
+        contaRepository.save(contaInvestimento.get());
+        return true;
     }
 
 
-    @PostMapping("/new-investiment")
-    public Object newInvestiment(@RequestBody Investimento investimento) {
-        return investimentoService.newInvestiment(investimento);
-    }
-
-    @PostMapping("/refound-investiment/{idinvenstimento}")
-    public Object refoundInvetiment(@PathVariable("idinvenstimento") Long idinvenstimento, @RequestParam Double valorRefound) {
-        return investimentoService.refoundInvestiment(idinvenstimento, valorRefound);
-    }
-
-    @PostMapping("add-investiment/{idinvestimento}")
-    public Object addInvestiment(@PathVariable("idinvestimento") Long idinvestimento, @RequestParam Double attValorInv) {
-        return investimentoService.addInvestiment(idinvestimento, attValorInv);
-    }
 }
