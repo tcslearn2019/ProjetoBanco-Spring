@@ -1,5 +1,7 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,8 +10,9 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idconta;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "iduser", referencedColumnName = "id", unique = true)
+    @JsonIgnoreProperties("conta")
     private User fkIdUser;
     private long conta;
     private long agencia;
@@ -18,19 +21,19 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+    public Conta(User fkIdUser, long conta, long agencia, double saldo) {
         this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
     }
 
-    public User getIduser() {
-        return fkIdUser;
+    public Long getIdconta() {
+        return idconta;
     }
 
-    public void setIduser(User iduser) {
-        this.fkIdUser = iduser;
+    public void setIdconta(Long idconta) {
+        this.idconta = idconta;
     }
 
     public double getSaldo() {
@@ -41,20 +44,13 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public Long getIdconta() {
-        return idconta;
+    public User getFkIdUser() {
+        return fkIdUser;
     }
 
-    public void setIdconta(long idconta) {
-        this.idconta = idconta;
-    }
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
 
-    public long getIdAgencia() {
-        return agencia;
-    }
-
-    public void setIdAgencia(long agencia) {
-        this.agencia = agencia;
     }
 
     public long getConta() {
@@ -65,14 +61,6 @@ public class Conta {
         this.conta = conta;
     }
 
-    public User getFkIdUser() {
-        return fkIdUser;
-    }
-
-    public void setFkIdUser(User fkIdUser) {
-        this.fkIdUser = fkIdUser;
-    }
-
     public long getAgencia() {
         return agencia;
     }
@@ -80,6 +68,7 @@ public class Conta {
     public void setAgencia(long agencia) {
         this.agencia = agencia;
     }
+
 
     @Override
     public String toString() {

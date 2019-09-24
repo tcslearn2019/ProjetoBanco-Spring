@@ -1,7 +1,6 @@
 package com.tcs.ProjetoBancoSpring.services;
 
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
-import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -22,9 +21,12 @@ public class InvestimentoScheduled {
         List<Investimento> investimentos = investimentoRepository.findAll();
 
         investimentos.forEach(investimento -> {
-            double juros = investimento.getFkIdTipoInvestimento().getJuros();
-            double valor = (investimento.getValor() / 100) * juros;
-            investimento.setValorTemp(investimento.getValor() + valor);
+            if(investimento.isAtivo()) {
+                double juros = investimento.getFkIdTipoInvestimento().getJuros();
+                double valor = (investimento.getValor() / 100) * juros;
+                investimento.setValorTemp(investimento.getValorTemp() + valor);
+                investimentoRepository.save(investimento);
+            }
         });
 
     }
