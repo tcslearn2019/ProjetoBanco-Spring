@@ -4,7 +4,6 @@ import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
 import com.tcs.ProjetoBancoSpring.services.UserService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,20 +53,15 @@ public class UserController {
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         Random rd = new Random();
+        user.setAdministrador(false);
         userRepository.save(user);
+        System.out.println(user);
         contaRepository.save(new Conta(user,rd.nextInt(999999),4570,0));
         return user;
     }
 
     @PostMapping("/validation")
     public User getValidation(@RequestBody Login login){
-        List<User> Usuarios = getUsers();
-        for(User i : Usuarios){
-            if(i.getCpf().equals(login.getLogin()) && i.getPwd().equals(login.getPwd())) {
-                return i;
-            }
-        }
-        Usuarios.stream().filter(line -> "one".equals(line.getFname())).forEach(System.out::println);
         return userService.login(login);
     }
 }
