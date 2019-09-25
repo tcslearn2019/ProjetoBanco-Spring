@@ -55,4 +55,8 @@ public class ContaService {
     public Conta findByUserId(Long id) {
         return repository.findByFkIdUserId(id);
     }
+
+    public Conta findByAgenciaAndConta(Long agencia, Long conta) {
+        return repository.findByAgenciaAndConta(agencia, conta);
+    }
 }

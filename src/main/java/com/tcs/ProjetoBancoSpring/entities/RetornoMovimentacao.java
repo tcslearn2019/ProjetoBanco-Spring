@@ -23,6 +23,15 @@ public class RetornoMovimentacao {
         this.dataTransferencia = dataTransferencia;
     }
 
+    public RetornoMovimentacao(Transferencias transferencias) {
+        this.agenciaOrigem = transferencias.getContaOrigem().getAgencia();
+        this.agenciaDestino = transferencias.getContaDestino().getAgencia();
+        this.contaOrigem = transferencias.getContaOrigem().getConta();
+        this.contaDestino = transferencias.getContaDestino().getConta();
+        this.valor = transferencias.getValor();
+        this.dataTransferencia = transferencias.getDataTransferencia();
+    }
+
     public long getAgenciaOrigem() {
         return agenciaOrigem;
     }

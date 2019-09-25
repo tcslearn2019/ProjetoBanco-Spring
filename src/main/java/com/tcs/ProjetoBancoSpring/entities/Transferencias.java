@@ -1,9 +1,6 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,38 +8,26 @@ public class Transferencias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTransferencias;
-    private long idContaOrigem;
-    private long idContaDestino;
     private double valor;
     private Date dataTransferencia;
 
-    public Transferencias(){
+    @ManyToOne
+    @JoinColumn(name = "conta_origem_fk")
+    private Conta contaOrigem;
 
+    @ManyToOne
+    @JoinColumn(name = "conta_destino_fk")
+    private Conta contaDestino;
+
+    public Transferencias(){
     }
 
-    public Transferencias(long idContaOrigem, long idContaDestino, double valor, Date dataTransferencia) {
-        this.idContaOrigem = idContaOrigem;
-        this.idContaDestino = idContaDestino;
+    public Transferencias(double valor, Date dataTransferencia, Conta contaOrigem, Conta contaDestino) {
         this.valor = valor;
         this.dataTransferencia = dataTransferencia;
+        this.contaOrigem = contaOrigem;
+        this.contaDestino = contaDestino;
     }
-
-    public long getIdContaOrigem() {
-        return idContaOrigem;
-    }
-
-    public void setIdContaOrigem(long idContaOrigem) {
-        this.idContaOrigem = idContaOrigem;
-    }
-
-    public long getIdContaDestino() {
-        return idContaDestino;
-    }
-
-    public void setIdContaDestino(long idContaDestino) {
-        this.idContaDestino = idContaDestino;
-    }
-
 
     public long getIdTransferencias() {
         return idTransferencias;
@@ -68,4 +53,19 @@ public class Transferencias {
         this.dataTransferencia = dataTransferencia;
     }
 
+    public Conta getContaOrigem() {
+        return contaOrigem;
+    }
+
+    public void setContaOrigem(Conta contaOrigem) {
+        this.contaOrigem = contaOrigem;
+    }
+
+    public Conta getContaDestino() {
+        return contaDestino;
+    }
+
+    public void setContaDestino(Conta contaDestino) {
+        this.contaDestino = contaDestino;
+    }
 }

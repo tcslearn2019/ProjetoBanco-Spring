@@ -34,7 +34,7 @@ public class UserController {
 
     @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
-        return service.save(user);
+        return service.update(user);
     }
 
     @PostMapping("/users")

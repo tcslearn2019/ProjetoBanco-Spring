@@ -1,50 +1,40 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 public class ParamTransf {
-    private String agencia;
-    private String conta;
-    private String valor;
-    private String idOrigem;
+    private Long agencia;
+    private Long conta;
+    private Double valor;
+    private Long idOrigem;
 
-    public ParamTransf(String agencia, String conta, String valor, String idOrigem) {
-        this.agencia = agencia;
-        this.conta = conta;
-        this.valor = valor;
-        this.idOrigem = idOrigem;
-    }
-
-    public ParamTransf(){}
-
-    public String getAgencia() {
+    public Long getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(String agencia) {
+    public void setAgencia(Long agencia) {
         this.agencia = agencia;
     }
 
-    public String getConta() {
+    public Long getConta() {
         return conta;
     }
 
-    public void setConta(String conta) {
+    public void setConta(Long conta) {
         this.conta = conta;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public String getIdOrigem() {
+    public Long getIdOrigem() {
         return idOrigem;
     }
 
-    public void setIdOrigem(String idOrigem) {
+    public void setIdOrigem(Long idOrigem) {
         this.idOrigem = idOrigem;
     }
-
 }

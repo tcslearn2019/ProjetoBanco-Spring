@@ -5,6 +5,7 @@ import com.tcs.ProjetoBancoSpring.entities.Login;
 import com.tcs.ProjetoBancoSpring.entities.User;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +40,7 @@ public class UserService {
 
     public boolean deleteById(Long id) {
         User user = findById(id);
-        if(Objects.nonNull(user)) {
+        if(nonNull(user)) {
             repository.deleteById(id);
             return true;
         } else {
@@ -47,8 +48,10 @@ public class UserService {
         }
     }
 
-    public User save(User user) {
-        return repository.save(user);
+    public User update(User user) {
+        User userFounded = findById(user.getId());
+        BeanUtils.copyProperties(user, userFounded, "id", "conta");
+        return repository.save(userFounded);
     }
 
     public User createUser(User user) {
