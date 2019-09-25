@@ -17,18 +17,19 @@ public class Investimento {
     private TipoInvestimento fkIdTipoInvestimento;
     private double valor;
     private double valorTemp;
-    private long idusuario;
-    private long idtipoinv;
+    private Date dataResgate;
+    private boolean ativo;
 
     public Investimento() {
     }
 
-    public Investimento(Date data, double valor, double valorTemp, long idusuario, long idtipoinv) {
+    public Investimento(Date data,Conta fkIdConta,TipoInvestimento fkIdTipoInvestimento,double valor, double valorTemp, boolean ativo) {
         this.data = data;
+        this.fkIdConta = fkIdConta;
+        this.fkIdTipoInvestimento = fkIdTipoInvestimento;
         this.valor = valor;
         this.valorTemp = valorTemp;
-        this.idusuario = idusuario;
-        this.idtipoinv = idtipoinv;
+        this.ativo = ativo;
     }
 
     public long getIdinvenstimento() {
@@ -71,31 +72,32 @@ public class Investimento {
         this.valorTemp = valorTemp;
     }
 
-    public long getIdusuario() {
-        return idusuario;
+    public boolean isAtivo() {
+        return ativo;
     }
 
-    public void setIdusuario(long idusuario) {
-        this.idusuario = idusuario;
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
-    public long getIdtipoinv() {
-        return idtipoinv;
+    public Date getDataResgate() {
+        return dataResgate;
     }
 
-    public void setIdtipoinv(long idtipoinv) {
-        this.idtipoinv = idtipoinv;
+    public void setDataResgate(Date dataResgate) {
+        this.dataResgate = dataResgate;
     }
-
 
     @Override
     public String toString() {
         return "Investimento{" +
                 "idinvenstimento=" + idinvenstimento +
                 ", data=" + data +
+                ", fkIdConta=" + fkIdConta +
+                ", fkIdTipoInvestimento=" + fkIdTipoInvestimento +
                 ", valor=" + valor +
-                ", idusuario=" + idusuario +
-                ", idtipoinv=" + idtipoinv +
+                ", valorTemp=" + valorTemp +
+                ", ativo=" + ativo +
                 '}';
     }
 

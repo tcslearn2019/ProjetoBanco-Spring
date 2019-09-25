@@ -17,18 +17,26 @@ public class User {
     private String email;
     private String tel;
 <<<<<<< HEAD
+<<<<<<< HEAD
     @OneToOne(mappedBy = "fkIdUser")
     @JsonIgnoreProperties("fkIdUser")
     private Conta conta;
 =======
     private String rg;
 >>>>>>> origin/Guilherme
+=======
+    private String rg;
+    private boolean administrador;
+    @OneToOne(mappedBy = "fkIdUser")
+    @JsonIgnoreProperties("fkIdUser")
+    private Conta conta;
+>>>>>>> origin/Guilherme
 
     public User() {
 
     }
 
-    public User(String fname, String lname, String cpf, String pwd, String email, String tel, String rg) {
+    public User(String fname, String lname, String cpf, String pwd, String email, String tel, String rg, boolean administrador) {
         this.fname = fname;
         this.lname = lname;
         this.cpf = cpf;
@@ -36,16 +44,9 @@ public class User {
         this.email = email;
         this.tel = tel;
         this.rg = rg;
+        this.administrador = administrador;
     }
-    public User(Long id, String fname, String lname, String cpf, String pwd, String email, String tel) {
-        this.id = id;
-        this.fname = fname;
-        this.lname = lname;
-        this.cpf = cpf;
-        this.pwd = pwd;
-        this.email = email;
-        this.tel = tel;
-    }
+
     public Long getId() {
         return id;
     }
@@ -103,12 +104,7 @@ public class User {
     }
 
 <<<<<<< HEAD
-    public Conta getConta() {
-        return conta;
-    }
-
-    public void setConta(Conta conta) {
-        this.conta = conta;
+<<<<<<< HEAD
 =======
     public String getRg() {
         return rg;
@@ -116,6 +112,33 @@ public class User {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+>>>>>>> origin/Guilherme
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+<<<<<<< HEAD
+=======
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+>>>>>>> origin/Guilherme
+=======
+    }
+
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
 >>>>>>> origin/Guilherme
     }
 
@@ -129,6 +152,11 @@ public class User {
                 ", pwd='" + pwd + '\'' +
                 ", email='" + email + '\'' +
                 ", tel='" + tel + '\'' +
+                ", rg='" + rg + '\'' +
+                ", administrador=" + administrador +
+                ", conta=" + conta +
                 '}';
     }
+
+
 }

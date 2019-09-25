@@ -21,7 +21,7 @@ public class Conta {
     public Conta() {
     }
 
-    public Conta(User fkIdUser, long conta, long agencia, long saldo) {
+    public Conta(User fkIdUser, long conta, long agencia, double saldo) {
         this.fkIdUser = fkIdUser;
         this.conta = conta;
         this.agencia = agencia;
@@ -37,12 +37,7 @@ public class Conta {
     }
 
 <<<<<<< HEAD
-    public User getFkIdUser() {
-        return fkIdUser;
-    }
-
-    public void setFkIdUser(User fkIdUser) {
-        this.fkIdUser = fkIdUser;
+<<<<<<< HEAD
 =======
     public double getSaldo() {
         return saldo;
@@ -50,6 +45,26 @@ public class Conta {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+>>>>>>> origin/Guilherme
+    public User getFkIdUser() {
+        return fkIdUser;
+    }
+
+    public void setFkIdUser(User fkIdUser) {
+        this.fkIdUser = fkIdUser;
+<<<<<<< HEAD
+=======
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+>>>>>>> origin/Guilherme
+=======
+
 >>>>>>> origin/Guilherme
     }
 
@@ -69,6 +84,7 @@ public class Conta {
         this.agencia = agencia;
     }
 
+<<<<<<< HEAD
     public long getSaldo() {
         return saldo;
     }
@@ -94,6 +110,9 @@ public class Conta {
     public void setAgencia(long agencia) {
         this.agencia = agencia;
     }
+
+>>>>>>> origin/Guilherme
+=======
 
 >>>>>>> origin/Guilherme
     @Override
