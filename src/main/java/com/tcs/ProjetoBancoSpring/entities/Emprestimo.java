@@ -7,15 +7,15 @@ import java.util.Date;
 public class Emprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEmprestimo;
+    private Long idEmprestimo;
     @OneToOne
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     private User fkIdUser;
     private Date dataEmprestimo;
-    private double juros;
-    private double valorEmprestimo;
-    private double valorPagar;
-    private boolean pago;
+    private Double juros;
+    private Double valorEmprestimo;
+    private Double valorPagar;
+    private Boolean pago;
     private Date dataPagamento;
 
 
@@ -23,7 +23,7 @@ public class Emprestimo {
 
     }
 
-    public Emprestimo(User fkIdUser, Date dataEmprestimo, double juros, double valorEmprestimo, boolean pago) {
+    public Emprestimo(User fkIdUser, Date dataEmprestimo, Double juros, Double valorEmprestimo, Boolean pago) {
         this.fkIdUser = fkIdUser;
         this.dataEmprestimo = dataEmprestimo;
         this.juros = juros;
@@ -32,11 +32,11 @@ public class Emprestimo {
         this.pago = pago;
     }
 
-    public long getIdEmprestimo() {
+    public Long getIdEmprestimo() {
         return idEmprestimo;
     }
 
-    public void setIdEmprestimo(long idEmprestimo) {
+    public void setIdEmprestimo(Long idEmprestimo) {
         this.idEmprestimo = idEmprestimo;
     }
 
@@ -56,28 +56,36 @@ public class Emprestimo {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public double getJuros() {
+    public Double getJuros() {
         return juros;
     }
 
-    public void setJuros(double juros) {
+    public void setJuros(Double juros) {
         this.juros = juros;
     }
 
-    public double getValorEmprestimo() {
+    public Double getValorEmprestimo() {
         return valorEmprestimo;
     }
 
-    public void setValorEmprestimo(double valorEmprestimo) {
+    public void setValorEmprestimo(Double valorEmprestimo) {
         this.valorEmprestimo = valorEmprestimo;
     }
 
-    public double getValorPagar() {
+    public Double getValorPagar() {
         return valorPagar;
     }
 
-    public void setValorPagar(double valorPagar) {
+    public void setValorPagar(Double valorPagar) {
         this.valorPagar = valorPagar;
+    }
+
+    public Boolean getPago() {
+        return pago;
+    }
+
+    public void setPago(Boolean pago) {
+        this.pago = pago;
     }
 
     @Override

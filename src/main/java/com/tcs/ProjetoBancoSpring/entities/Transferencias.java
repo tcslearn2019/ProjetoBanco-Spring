@@ -7,8 +7,8 @@ import java.util.Date;
 public class Transferencias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idTransferencias;
-    private double valor;
+    private Long idTransferencias;
+    private Double valor;
     private Date dataTransferencia;
 
     @ManyToOne
@@ -29,19 +29,19 @@ public class Transferencias {
         this.contaDestino = contaDestino;
     }
 
-    public long getIdTransferencias() {
+    public Long getIdTransferencias() {
         return idTransferencias;
     }
 
-    public void setIdTransferencias(long idTransferencias) {
+    public void setIdTransferencias(Long idTransferencias) {
         this.idTransferencias = idTransferencias;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

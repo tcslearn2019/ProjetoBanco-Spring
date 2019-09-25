@@ -15,10 +15,10 @@ public class Investimento {
     @OneToOne
     @JoinColumn(name = "idTipInv", referencedColumnName = "idinv")
     private TipoInvestimento fkIdTipoInvestimento;
-    private double valor;
-    private double valorTemp;
+    private Double valor;
+    private Double valorTemp;
     private Date dataResgate;
-    private boolean ativo;
+    private Boolean ativo;
 
     public Investimento() {
         this.data = new Date(System.currentTimeMillis());
@@ -26,7 +26,7 @@ public class Investimento {
     }
 
 
-    public Investimento(Long id, Date data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, double valor, double valorTemp, Date dataResgate, boolean ativo) {
+    public Investimento(Long id, Date data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, Double valor, Double valorTemp, Date dataResgate, boolean ativo) {
         this.id = id;
         this.data = data;
         this.fkIdConta = fkIdConta;
@@ -69,27 +69,27 @@ public class Investimento {
         this.fkIdTipoInvestimento = fkIdTipoInvestimento;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public double getValorTemp() {
+    public Double getValorTemp() {
         return valorTemp;
     }
 
-    public void setValorTemp(double valorTemp) {
+    public void setValorTemp(Double valorTemp) {
         this.valorTemp = valorTemp;
     }
 
-    public boolean isAtivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
