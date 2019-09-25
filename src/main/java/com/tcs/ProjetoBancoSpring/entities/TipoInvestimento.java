@@ -9,23 +9,23 @@ import javax.persistence.Id;
 public class TipoInvestimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idinv;
+    private Long idinv;
     private String nome;
-    private double juros;
+    private Double juros;
 
     public TipoInvestimento() {
     }
 
-    public TipoInvestimento(String nome, double juros) {
+    public TipoInvestimento(String nome, Double juros) {
         this.nome = nome;
         this.juros = juros;
     }
 
-    public long getIdinv() {
+    public Long getIdinv() {
         return idinv;
     }
 
-    public void setIdinv(long idinv) {
+    public void setIdinv(Long idinv) {
         this.idinv = idinv;
     }
 
@@ -37,11 +37,11 @@ public class TipoInvestimento {
         this.nome = nome;
     }
 
-    public double getJuros() {
+    public Double getJuros() {
         return juros;
     }
 
-    public void setJuros(double juros) {
+    public void setJuros(Double juros) {
         this.juros = juros;
     }
 
