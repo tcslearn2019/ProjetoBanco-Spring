@@ -54,9 +54,8 @@ public class UserService {
     public User createUser(User user) {
         Random rd = new Random();
         user.setAdministrador(false);
-        repository.save(user);
-        System.out.println(user);
-        contaRepository.save(new Conta(user, rd.nextInt(999999), 4570, 0));
+        User userSaved = repository.save(user);
+        contaRepository.save(new Conta(userSaved, rd.nextInt(999999), 4570, 0));
         return user;
     }
 }
