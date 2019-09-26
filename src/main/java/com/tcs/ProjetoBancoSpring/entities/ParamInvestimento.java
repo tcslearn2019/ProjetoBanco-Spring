@@ -11,7 +11,7 @@ public class ParamInvestimento {
 
     }
 
-    public ParamInvestimento(double juros, long idinv, String nome, long valor) {
+    public ParamInvestimento(double juros, long idinv, String nome, double valor) {
         this.juros = juros;
         this.idinv = idinv;
         this.nome = nome;
