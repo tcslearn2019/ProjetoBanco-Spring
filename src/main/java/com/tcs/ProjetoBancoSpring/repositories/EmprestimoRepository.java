@@ -9,7 +9,9 @@ import java.util.List;
 @SpringBootApplication
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
 
-
     List<Emprestimo> findByFkIdUserIdAndPago(Long id, Boolean pago);
+
+    Long countByFkIdUserIdAndPago(Long id, Boolean pago);
+
 
 }

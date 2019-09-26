@@ -1,7 +1,6 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Emprestimo {
@@ -11,19 +10,19 @@ public class Emprestimo {
     @OneToOne
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     private User fkIdUser;
-    private Date dataEmprestimo;
+    private String dataEmprestimo;
     private Double juros;
     private Double valorEmprestimo;
     private Double valorPagar;
     private Boolean pago;
-    private Date dataPagamento;
+    private String dataPagamento;
 
 
     public Emprestimo(){
 
     }
 
-    public Emprestimo(User fkIdUser, Date dataEmprestimo, Double juros, Double valorEmprestimo, Boolean pago) {
+    public Emprestimo(User fkIdUser, String dataEmprestimo, Double juros, Double valorEmprestimo, Boolean pago) {
         this.fkIdUser = fkIdUser;
         this.dataEmprestimo = dataEmprestimo;
         this.juros = juros;
@@ -48,11 +47,11 @@ public class Emprestimo {
         this.fkIdUser = fkIdUser;
     }
 
-    public Date getDataEmprestimo() {
+    public String getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(String dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
@@ -107,11 +106,11 @@ public class Emprestimo {
         this.pago = pago;
     }
 
-    public Date getDataPagamento() {
+    public String getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(String dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,7 +76,8 @@ public class TransferenciaService {
             contaOrigem.setSaldo(contaOrigem.getSaldo() - valorTransfer);
             contaService.save(contaOrigem);
 
-            Transferencias transf = new Transferencias(valorTransfer, new Date(System.currentTimeMillis()), contaOrigem, contaDestino );
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            Transferencias transf = new Transferencias(valorTransfer, dateFormat.format(new Date(System.currentTimeMillis())), contaOrigem, contaDestino );
             repository.save(transf);
             return true;
         } else {

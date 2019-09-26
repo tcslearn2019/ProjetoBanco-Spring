@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -87,8 +89,9 @@ public class InvestimentoService {
     public boolean refound(Investimento investimento) {
         Investimento inv = findById(investimento.getId());
         inv.setAtivo(false);
-        inv.setDataResgate(new Date(System.currentTimeMillis()));
-        repository.save(investimento);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        inv.setDataResgate(dateFormat.format(new Date(System.currentTimeMillis())));
+        repository.save(inv);
         inv.getFkIdConta().setSaldo(inv.getValorTemp() + inv.getFkIdConta().getSaldo());
         contaService.save(inv.getFkIdConta());
         return true;

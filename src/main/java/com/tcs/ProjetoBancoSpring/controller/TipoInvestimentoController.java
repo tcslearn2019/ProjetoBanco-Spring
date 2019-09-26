@@ -20,6 +20,16 @@ public class TipoInvestimentoController {
         return service.findAll();
     }
 
+    @GetMapping("/type/investimentsativo")
+    public List<TipoInvestimento> getinvesimentsativo(){
+        return service.findByAtivo(true);
+    }
+
+    @GetMapping("/type/investimentsinativo")
+    public List<TipoInvestimento> getinvesimentsinativo(){
+        return service.findByAtivo(false);
+    }
+
     @GetMapping("/type/investiment/{id}")
     public TipoInvestimento getUser(@PathVariable Long id){
         return service.findById(id);
@@ -39,4 +49,5 @@ public class TipoInvestimentoController {
     public TipoInvestimento createUser(@RequestBody TipoInvestimento tipoInvestimento){
         return service.save(tipoInvestimento);
     }
+
 }

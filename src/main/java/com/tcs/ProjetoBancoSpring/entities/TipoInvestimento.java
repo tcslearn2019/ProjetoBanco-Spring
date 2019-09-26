@@ -12,13 +12,15 @@ public class TipoInvestimento {
     private Long idinv;
     private String nome;
     private Double juros;
+    private Boolean ativo;
 
     public TipoInvestimento() {
     }
 
-    public TipoInvestimento(String nome, Double juros) {
+    public TipoInvestimento(String nome, Double juros, Boolean ativo) {
         this.nome = nome;
         this.juros = juros;
+        this.ativo = ativo;
     }
 
     public Long getIdinv() {
@@ -45,12 +47,21 @@ public class TipoInvestimento {
         this.juros = juros;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public String toString() {
-        return "TipoIvestimento{" +
+        return "TipoInvestimento{" +
                 "idinv=" + idinv +
                 ", nome='" + nome + '\'' +
                 ", juros=" + juros +
+                ", ativo=" + ativo +
                 '}';
     }
 }

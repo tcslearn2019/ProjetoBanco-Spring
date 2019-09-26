@@ -29,7 +29,14 @@ public class TipoInvestimentoService {
     public boolean deleteUser(Long id) {
         TipoInvestimento tipoInvestimento = findById(id);
         if(nonNull(tipoInvestimento)) {
-            repository.deleteById(id);
+            if(tipoInvestimento.getAtivo()) {
+                tipoInvestimento.setAtivo(false);
+                repository.save(tipoInvestimento);
+            }
+            else{
+                tipoInvestimento.setAtivo(true);
+                repository.save(tipoInvestimento);
+            }
             return true;
         } else {
             return false;
@@ -38,12 +45,17 @@ public class TipoInvestimentoService {
 
     public TipoInvestimento updateUser(TipoInvestimento tipoInvestimento) {
         TipoInvestimento tipInvestimento = findById(tipoInvestimento.getIdinv());
-        BeanUtils.copyProperties(tipInvestimento, tipInvestimento, "idinv" );
+        BeanUtils.copyProperties(tipoInvestimento, tipInvestimento, "idinv" );
         return repository.save(tipInvestimento);
     }
 
     public TipoInvestimento save(TipoInvestimento tipoInvestimento) {
+        tipoInvestimento.setAtivo(true);
         return repository.save(tipoInvestimento);
+    }
+
+    public List<TipoInvestimento> findByAtivo(Boolean b) {
+        return repository.findByAtivo(b);
     }
 }
 

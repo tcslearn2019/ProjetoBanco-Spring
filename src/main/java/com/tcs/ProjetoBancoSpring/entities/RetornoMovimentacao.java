@@ -1,20 +1,18 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-import java.util.Date;
-
 public class RetornoMovimentacao {
     private Long agenciaOrigem;
     private Long agenciaDestino;
     private Long contaOrigem;
     private Long contaDestino;
     private Double valor;
-    private Date dataTransferencia;
+    private String dataTransferencia;
 
     public RetornoMovimentacao(){
 
     }
 
-    public RetornoMovimentacao(Long agenciaOrigem, Long agenciaDestino, Long contaOrigem, Long contaDestino, double valor, Date dataTransferencia) {
+    public RetornoMovimentacao(Long agenciaOrigem, Long agenciaDestino, Long contaOrigem, Long contaDestino, double valor, String dataTransferencia) {
         this.agenciaOrigem = agenciaOrigem;
         this.agenciaDestino = agenciaDestino;
         this.contaOrigem = contaOrigem;
@@ -72,11 +70,11 @@ public class RetornoMovimentacao {
         this.valor = valor;
     }
 
-    public Date getDataTransferencia() {
+    public String getDataTransferencia() {
         return dataTransferencia;
     }
 
-    public void setDataTransferencia(Date dataTransferencia) {
+    public void setDataTransferencia(String dataTransferencia) {
         this.dataTransferencia = dataTransferencia;
     }
 

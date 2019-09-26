@@ -1,7 +1,6 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Transferencias {
@@ -9,7 +8,7 @@ public class Transferencias {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTransferencias;
     private Double valor;
-    private Date dataTransferencia;
+    private String dataTransferencia;
 
     @ManyToOne
     @JoinColumn(name = "conta_origem_fk")
@@ -22,7 +21,7 @@ public class Transferencias {
     public Transferencias(){
     }
 
-    public Transferencias(double valor, Date dataTransferencia, Conta contaOrigem, Conta contaDestino) {
+    public Transferencias(double valor, String dataTransferencia, Conta contaOrigem, Conta contaDestino) {
         this.valor = valor;
         this.dataTransferencia = dataTransferencia;
         this.contaOrigem = contaOrigem;
@@ -45,11 +44,11 @@ public class Transferencias {
         this.valor = valor;
     }
 
-    public Date getDataTransferencia() {
+    public String getDataTransferencia() {
         return dataTransferencia;
     }
 
-    public void setDataTransferencia(Date dataTransferencia) {
+    public void setDataTransferencia(String dataTransferencia) {
         this.dataTransferencia = dataTransferencia;
     }
 

@@ -1,6 +1,8 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -8,7 +10,7 @@ public class Investimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date data;
+    private String data;
     @ManyToOne
     @JoinColumn(name = "idconta", referencedColumnName = "idconta")
     private Conta fkIdConta;
@@ -17,16 +19,17 @@ public class Investimento {
     private TipoInvestimento fkIdTipoInvestimento;
     private Double valor;
     private Double valorTemp;
-    private Date dataResgate;
+    private String dataResgate;
     private Boolean ativo;
 
     public Investimento() {
-        this.data = new Date(System.currentTimeMillis());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        this.data = dateFormat.format(new Date(System.currentTimeMillis()));
         this.ativo = true;
     }
 
 
-    public Investimento(Long id, Date data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, Double valor, Double valorTemp, Date dataResgate, boolean ativo) {
+    public Investimento(Long id, String data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, Double valor, Double valorTemp, String dataResgate, Boolean ativo) {
         this.id = id;
         this.data = data;
         this.fkIdConta = fkIdConta;
@@ -45,11 +48,11 @@ public class Investimento {
         this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -93,11 +96,11 @@ public class Investimento {
         this.ativo = ativo;
     }
 
-    public Date getDataResgate() {
+    public String getDataResgate() {
         return dataResgate;
     }
 
-    public void setDataResgate(Date dataResgate) {
+    public void setDataResgate(String dataResgate) {
         this.dataResgate = dataResgate;
     }
 

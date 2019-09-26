@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +39,7 @@ public class EmprestimoService {
 
     public boolean deleteById(Long id) {
         Emprestimo emprestimo = findById(id);
-        if(nonNull(emprestimo)) {
+        if (nonNull(emprestimo)) {
             repository.deleteById(id);
             return true;
         } else {
@@ -46,21 +48,23 @@ public class EmprestimoService {
     }
 
     public Emprestimo update(Emprestimo paramEmprestimo) {
-        Emprestimo emp =  findById(paramEmprestimo.getIdEmprestimo());
+        Emprestimo emp = findById(paramEmprestimo.getIdEmprestimo());
         BeanUtils.copyProperties(paramEmprestimo, emp, "idEmprestimo", "fkIdUser");
         return repository.save(emp);
     }
 
     public Emprestimo createEmprestimo(ParamEmprestimo paramEmprestimo) {
-        if(paramEmprestimo.getValor() > 0) {
-            Conta destino = contaService.findByUserId(paramEmprestimo.getIdOrigem());
-            destino.setSaldo(destino.getSaldo() + paramEmprestimo.getValor());
-            contaService.save(destino);
-            Emprestimo emprestimo = new Emprestimo(destino.getFkIdUser(), new Date(System.currentTimeMillis()), 2.5,paramEmprestimo.getValor(), false);
-            return repository.save(emprestimo);
-        }else{
-            return null;
+        if (repository.countByFkIdUserIdAndPago(paramEmprestimo.getIdOrigem(), false) <= 4) {
+            if (paramEmprestimo.getValor() > 0 && paramEmprestimo.getValor() <= 5000) {
+                Conta destino = contaService.findByUserId(paramEmprestimo.getIdOrigem());
+                destino.setSaldo(destino.getSaldo() + paramEmprestimo.getValor());
+                contaService.save(destino);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                Emprestimo emprestimo = new Emprestimo(destino.getFkIdUser(), dateFormat.format(new Date(System.currentTimeMillis())), 2.5, paramEmprestimo.getValor(), false);
+                return repository.save(emprestimo);
+            }
         }
+        return null;
     }
 
     public List<Emprestimo> getValidation(Long id) {
@@ -75,7 +79,8 @@ public class EmprestimoService {
         Emprestimo emprestimo = findById(id);
         Conta conta = emprestimo.getFkIdUser().getConta();
         if (conta.getSaldo() >= emprestimo.getValorPagar()) {
-            emprestimo.setDataPagamento(new Date(System.currentTimeMillis()));
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            emprestimo.setDataPagamento(dateFormat.format(new Date(System.currentTimeMillis())));
             emprestimo.setPago(true);
             repository.save(emprestimo);
             conta.setSaldo(conta.getSaldo() - emprestimo.getValorPagar());
