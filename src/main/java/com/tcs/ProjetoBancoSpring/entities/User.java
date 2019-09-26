@@ -12,10 +12,12 @@ public class User {
     private Long id;
     private String fname;
     private String lname;
+    @Column(unique=true)
     private String cpf;
     private String pwd;
     private String email;
     private String tel;
+    @Column(unique=true)
     private String rg;
     private Boolean administrador;
     @OneToOne(mappedBy = "fkIdUser")
