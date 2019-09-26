@@ -19,9 +19,8 @@ public class InvestimentoScheduled {
     @Scheduled(cron = "0 0/1 * * * ?")
     public void CalcularInvestimento() {
         List<Investimento> investimentos = investimentoRepository.findAll();
-
         investimentos.forEach(investimento -> {
-            if(investimento.isAtivo()) {
+            if(investimento.isAtivo() && investimento.getFkIdTipoInvestimento().getAtivo()) {
                 double juros = investimento.getFkIdTipoInvestimento().getJuros();
                 double valor = (investimento.getValor() / 100) * juros;
                 investimento.setValorTemp(investimento.getValorTemp() + valor);

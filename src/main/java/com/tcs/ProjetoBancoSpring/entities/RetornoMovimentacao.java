@@ -1,20 +1,18 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
-import java.util.Date;
-
 public class RetornoMovimentacao {
-    private long agenciaOrigem;
-    private long agenciaDestino;
-    private long contaOrigem;
-    private long contaDestino;
-    private double valor;
-    private Date dataTransferencia;
+    private Long agenciaOrigem;
+    private Long agenciaDestino;
+    private Long contaOrigem;
+    private Long contaDestino;
+    private Double valor;
+    private String dataTransferencia;
 
     public RetornoMovimentacao(){
 
     }
 
-    public RetornoMovimentacao(long agenciaOrigem, long agenciaDestino, long contaOrigem, long contaDestino, double valor, Date dataTransferencia) {
+    public RetornoMovimentacao(Long agenciaOrigem, Long agenciaDestino, Long contaOrigem, Long contaDestino, double valor, String dataTransferencia) {
         this.agenciaOrigem = agenciaOrigem;
         this.agenciaDestino = agenciaDestino;
         this.contaOrigem = contaOrigem;
@@ -23,51 +21,60 @@ public class RetornoMovimentacao {
         this.dataTransferencia = dataTransferencia;
     }
 
-    public long getAgenciaOrigem() {
+    public RetornoMovimentacao(Transferencias transferencias) {
+        this.agenciaOrigem = transferencias.getContaOrigem().getAgencia();
+        this.agenciaDestino = transferencias.getContaDestino().getAgencia();
+        this.contaOrigem = transferencias.getContaOrigem().getConta();
+        this.contaDestino = transferencias.getContaDestino().getConta();
+        this.valor = transferencias.getValor();
+        this.dataTransferencia = transferencias.getDataTransferencia();
+    }
+
+    public Long getAgenciaOrigem() {
         return agenciaOrigem;
     }
 
-    public void setAgenciaOrigem(long agenciaOrigem) {
+    public void setAgenciaOrigem(Long agenciaOrigem) {
         this.agenciaOrigem = agenciaOrigem;
     }
 
-    public long getAgenciaDestino() {
+    public Long getAgenciaDestino() {
         return agenciaDestino;
     }
 
-    public void setAgenciaDestino(long agenciaDestino) {
+    public void setAgenciaDestino(Long agenciaDestino) {
         this.agenciaDestino = agenciaDestino;
     }
 
-    public long getContaOrigem() {
+    public Long getContaOrigem() {
         return contaOrigem;
     }
 
-    public void setContaOrigem(long contaOrigem) {
+    public void setContaOrigem(Long contaOrigem) {
         this.contaOrigem = contaOrigem;
     }
 
-    public long getContaDestino() {
+    public Long getContaDestino() {
         return contaDestino;
     }
 
-    public void setContaDestino(long contaDestino) {
+    public void setContaDestino(Long contaDestino) {
         this.contaDestino = contaDestino;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public Date getDataTransferencia() {
+    public String getDataTransferencia() {
         return dataTransferencia;
     }
 
-    public void setDataTransferencia(Date dataTransferencia) {
+    public void setDataTransferencia(String dataTransferencia) {
         this.dataTransferencia = dataTransferencia;
     }
 

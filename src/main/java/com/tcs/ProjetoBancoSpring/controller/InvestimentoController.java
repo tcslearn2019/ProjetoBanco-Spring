@@ -1,18 +1,11 @@
 package com.tcs.ProjetoBancoSpring.controller;
 
-import com.tcs.ProjetoBancoSpring.entities.Conta;
 import com.tcs.ProjetoBancoSpring.entities.Investimento;
 import com.tcs.ProjetoBancoSpring.entities.ParamInvestimento;
-import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
-import com.tcs.ProjetoBancoSpring.repositories.InvestimentoRepository;
-import com.tcs.ProjetoBancoSpring.repositories.TipoInvestimentoRepository;
+import com.tcs.ProjetoBancoSpring.services.InvestimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/banco")
@@ -20,76 +13,46 @@ import java.util.stream.Collectors;
 public class InvestimentoController {
 
     @Autowired
-    private InvestimentoRepository investimentoRepository;
-
-    @Autowired
-    private ContaRepository contaRepository;
-
-    @Autowired
-    private TipoInvestimentoRepository tipoInvestimentoRepository;
-
+    private InvestimentoService service;
 
     @GetMapping("/investiment")
     public List<Investimento> getInvestimentos(){
-        return investimentoRepository.findAll();
+        return service.findAll();
     }
 
     @GetMapping("/investiment/{id}")
     public Investimento getInvestimento(@PathVariable Long id){
-        Optional<Investimento> optionalUser = investimentoRepository.findById(id);
-        return optionalUser.get();
+        return service.findById(id);
     }
 
     @DeleteMapping("/investiment/{id}")
     public boolean deleteInvestimento(@PathVariable Long id){
-        investimentoRepository.deleteById(id);
-        return true;
+        return service.deleteById(id);
     }
 
-    @PutMapping("/investiment") public Investimento updateInvestimento(@RequestBody Investimento user){
-        return investimentoRepository.save(user);
+    @PutMapping("/investiment")
+    public Investimento updateInvestimento(@RequestBody Investimento investimento){
+        return service.update(investimento);
     }
 
     @PostMapping("/investimentnew")
     public boolean getValidation(@RequestBody ParamInvestimento paramInvestimento){
-        Optional <Conta> contaUser = contaRepository.findAll().stream().filter(idConta ->
-                idConta.getFkIdUser().getId() == paramInvestimento.getIduser()).findFirst();
-
-
-        if(contaUser.get().getSaldo() >= paramInvestimento.getValor() && paramInvestimento.getValor() > 0){
-                investimentoRepository.save(new Investimento(new Date(System.currentTimeMillis()),
-                    contaUser.get(), tipoInvestimentoRepository.findById(paramInvestimento.getIdinv()).get(),
-                        paramInvestimento.getValor(), paramInvestimento.getValor() , true));
-                contaUser.get().setSaldo(contaUser.get().getSaldo() - paramInvestimento.getValor());
-            contaRepository.save(contaUser.get());
-            return true;
-        }
-        else{
-            return false;
-        }
+        return service.createInvestiment(paramInvestimento);
     }
 
     @PostMapping("/investimentbyid")
     public List<Investimento> getListInvestimento(@RequestBody Long id){
-        List<Investimento> listaEmprestimos = investimentoRepository.findAll().stream().filter(idInvestimento -> idInvestimento.getFkIdConta().getFkIdUser().getId() == id && idInvestimento.isAtivo()).collect(Collectors.toList());
-        return listaEmprestimos;
+        return service.findByIdUserAtivo(id);
     }
 
     @PostMapping("/investimentbyidresgatados")
     public List<Investimento> getListInvestimentoResgatados(@RequestBody Long id){
-        List<Investimento> listaEmprestimos = investimentoRepository.findAll().stream().filter(idInvestimento -> idInvestimento.getFkIdConta().getFkIdUser().getId() == id && !idInvestimento.isAtivo()).collect(Collectors.toList());
-        return listaEmprestimos;
+        return service.findByIdUserInativo(id);
     }
 
     @PostMapping("/resgateinvestimentbyid")
     public boolean updateInvestimentoById(@RequestBody Investimento investimento){
-        investimento.setAtivo(false);
-        investimento.setDataResgate(new Date(System.currentTimeMillis()));
-        investimentoRepository.save(investimento);
-        Optional <Conta> contaInvestimento = contaRepository.findById(investimento.getFkIdConta().getIdconta());
-        contaInvestimento.get().setSaldo(investimento.getValorTemp() + contaInvestimento.get().getSaldo());
-        contaRepository.save(contaInvestimento.get());
-        return true;
+        return service.refound(investimento);
     }
 
 
