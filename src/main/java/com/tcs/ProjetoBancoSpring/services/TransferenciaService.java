@@ -54,6 +54,7 @@ public class TransferenciaService {
 
     public Transferencias save(Transferencias transferencia) {
         return repository.save(transferencia);
+
     }
 
     public List<RetornoMovimentacao> listEmprestimo(Long id) {
@@ -64,6 +65,9 @@ public class TransferenciaService {
     public boolean getValidation(ParamTransf paramTransf) {
         Conta origem = contaService.findByUserId(paramTransf.getIdOrigem());
         Conta destino = contaService.findByAgenciaAndConta(paramTransf.getAgencia(), paramTransf.getConta());
+        if(destino == null){
+            return false;
+        }
         return Operacao(origem, destino, paramTransf.getValor());
     }
 
