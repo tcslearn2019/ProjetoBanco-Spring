@@ -7,6 +7,7 @@ import com.tcs.ProjetoBancoSpring.entities.User;
 import com.tcs.ProjetoBancoSpring.repositories.ContaRepository;
 import com.tcs.ProjetoBancoSpring.repositories.EmprestimoRepository;
 import com.tcs.ProjetoBancoSpring.repositories.UserRepository;
+import com.tcs.ProjetoBancoSpring.services.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,78 +18,50 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/banco")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*" )
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class EmprestimoController {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
-    private EmprestimoRepository emprestimoRepository;
-
-    @Autowired
-    private ContaRepository contaRepository;
+    private EmprestimoService service;
 
     @GetMapping("/loan")
-    public List<Emprestimo> getEmprestimo(){
-        return emprestimoRepository.findAll();
+    public List<Emprestimo> getEmprestimo() {
+        return service.findAll();
     }
 
     @GetMapping("/loan/{id}")
-    public Emprestimo getEmprestimo(@PathVariable Long id){
-        Optional<Emprestimo> optionalUser = emprestimoRepository.findById(id);
-        return optionalUser.get();
+    public Emprestimo getEmprestimo(@PathVariable Long id) {
+        return service.findById(id);
     }
 
     @DeleteMapping("/loan/{id}")
-    public boolean deleteEmprestimo(@PathVariable Long id){
-        emprestimoRepository.deleteById(id);
-        return true;
+    public boolean deleteEmprestimo(@PathVariable Long id) {
+        return service.deleteById(id);
     }
 
-    @PutMapping("/loan") public Emprestimo updateEmprestimo(@RequestBody Emprestimo paramEmprestimo){
-        return emprestimoRepository.save(paramEmprestimo);
+    @PutMapping("/loan")
+    public Emprestimo updateEmprestimo(@RequestBody Emprestimo paramEmprestimo) {
+        return service.update(paramEmprestimo);
     }
 
     @PostMapping("/loan")
-    public Emprestimo createEmprestimo(@RequestBody ParamEmprestimo paramEmprestimo){
-        if(Double.parseDouble(paramEmprestimo.getValor()) > 0) {
-            Optional<User> userTemp = userRepository.findById(Long.parseLong(paramEmprestimo.getIdOrigem()));
-            Optional<Conta> destino = contaRepository.findAll().stream().filter(conta ->
-                    conta.getFkIdUser().getId() == userTemp.get().getId()).findFirst();
-            destino.get().setSaldo(destino.get().getSaldo() + Double.parseDouble(paramEmprestimo.getValor()));
-            contaRepository.save(destino.get());
-            return emprestimoRepository.save(new Emprestimo(userTemp.get(), new Date(System.currentTimeMillis()), 2.5, Double.parseDouble(paramEmprestimo.getValor()), false));
-        }else{
-            return null;
-        }
+    public Emprestimo createEmprestimo(@RequestBody ParamEmprestimo paramEmprestimo) {
+        return service.createEmprestimo(paramEmprestimo);
+
     }
 
     @PostMapping("/loanpersonal")
-    public List<Emprestimo> getValidation(@RequestBody Long id){
-        List<Emprestimo> listaEmprestimos = emprestimoRepository.findAll().stream().filter(idEmprestimo -> idEmprestimo.getFkIdUser().getId() == id && idEmprestimo.isPago() == false).collect(Collectors.toList());
-        return listaEmprestimos;
+    public List<Emprestimo> getValidation(@RequestBody Long id) {
+        return service.getValidation(id);
     }
 
     @PostMapping("/loanpersonalpayed")
-    public List<Emprestimo> getValidationPayed(@RequestBody Long id){
-        List<Emprestimo> listaEmprestimos = emprestimoRepository.findAll().stream().filter(idEmprestimo -> idEmprestimo.getFkIdUser().getId() == id && idEmprestimo.isPago() == true).collect(Collectors.toList());
-        return listaEmprestimos;
+    public List<Emprestimo> getValidationPayed(@RequestBody Long id) {
+        return service.getValidationPayed(id);
     }
 
     @PostMapping("/loanpay")
-    public boolean getPay(@RequestBody Long id){
-        Optional<Conta> contTemp = contaRepository.findById(emprestimoRepository.findById(id).get().getFkIdUser().getId());
-        Emprestimo emprestimoTemp = new Emprestimo();
-        emprestimoTemp = emprestimoRepository.findById(id).get();
-        if(contTemp.get().getSaldo() >= emprestimoTemp.getValorPagar()){
-            emprestimoTemp.setPago(true);
-            emprestimoTemp.setDataPagamento(new Date(System.currentTimeMillis()));
-            emprestimoRepository.save(emprestimoTemp);
-            contTemp.get().setSaldo( contTemp.get().getSaldo() - emprestimoTemp.getValorPagar());
-            contaRepository.save(contTemp.get());
-            return true;
-        }
-        return false;
+    public boolean getPay(@RequestBody Long id) {
+        return service.getPay(id);
     }
-
 }

@@ -1,97 +1,113 @@
 package com.tcs.ProjetoBancoSpring.entities;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class Investimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idinvenstimento;
-    private Date data;
+    private Long id;
+    private String data;
     @ManyToOne
-    @JoinColumn(name="idconta", referencedColumnName = "idconta")
+    @JoinColumn(name = "idconta", referencedColumnName = "idconta")
     private Conta fkIdConta;
     @OneToOne
     @JoinColumn(name = "idTipInv", referencedColumnName = "idinv")
     private TipoInvestimento fkIdTipoInvestimento;
-    private double valor;
-    private double valorTemp;
-    private Date dataResgate;
-    private boolean ativo;
+    private Double valor;
+    private Double valorTemp;
+    private String dataResgate;
+    private Boolean ativo;
 
     public Investimento() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        this.data = dateFormat.format(new Date(System.currentTimeMillis()));
+        this.ativo = true;
     }
 
-    public Investimento(Date data,Conta fkIdConta,TipoInvestimento fkIdTipoInvestimento,double valor, double valorTemp, boolean ativo) {
+
+    public Investimento(Long id, String data, Conta fkIdConta, TipoInvestimento fkIdTipoInvestimento, Double valor, Double valorTemp, String dataResgate, Boolean ativo) {
+        this.id = id;
         this.data = data;
         this.fkIdConta = fkIdConta;
         this.fkIdTipoInvestimento = fkIdTipoInvestimento;
         this.valor = valor;
         this.valorTemp = valorTemp;
+        this.dataResgate = dataResgate;
         this.ativo = ativo;
     }
 
-    public long getIdinvenstimento() {
-        return idinvenstimento;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdinvenstimento(long idinvenstimento) {
-        this.idinvenstimento = idinvenstimento;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public Conta getFkIdConta() { return fkIdConta; }
+    public Conta getFkIdConta() {
+        return fkIdConta;
+    }
 
-    public void setFkIdConta(Conta fkIdConta) { this.fkIdConta = fkIdConta; }
+    public void setFkIdConta(Conta fkIdConta) {
+        this.fkIdConta = fkIdConta;
+    }
 
-    public TipoInvestimento getFkIdTipoInvestimento() { return fkIdTipoInvestimento; }
+    public TipoInvestimento getFkIdTipoInvestimento() {
+        return fkIdTipoInvestimento;
+    }
 
-    public void setFkIdTipoInvestimento(TipoInvestimento fkIdTipoInvestimento) { this.fkIdTipoInvestimento = fkIdTipoInvestimento; }
+    public void setFkIdTipoInvestimento(TipoInvestimento fkIdTipoInvestimento) {
+        this.fkIdTipoInvestimento = fkIdTipoInvestimento;
+    }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
-    public double getValorTemp() {
+    public Double getValorTemp() {
         return valorTemp;
     }
 
-    public void setValorTemp(double valorTemp) {
+    public void setValorTemp(Double valorTemp) {
         this.valorTemp = valorTemp;
     }
 
-    public boolean isAtivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
-    public Date getDataResgate() {
+    public String getDataResgate() {
         return dataResgate;
     }
 
-    public void setDataResgate(Date dataResgate) {
+    public void setDataResgate(String dataResgate) {
         this.dataResgate = dataResgate;
     }
 
     @Override
     public String toString() {
         return "Investimento{" +
-                "idinvenstimento=" + idinvenstimento +
+                "id=" + id +
                 ", data=" + data +
                 ", fkIdConta=" + fkIdConta +
                 ", fkIdTipoInvestimento=" + fkIdTipoInvestimento +
@@ -100,5 +116,6 @@ public class Investimento {
                 ", ativo=" + ativo +
                 '}';
     }
+
 
 }

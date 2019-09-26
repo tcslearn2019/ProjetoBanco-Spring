@@ -17,7 +17,7 @@ public class User {
     private String email;
     private String tel;
     private String rg;
-    private boolean administrador;
+    private Boolean administrador;
     @OneToOne(mappedBy = "fkIdUser")
     @JsonIgnoreProperties("fkIdUser")
     private Conta conta;
@@ -26,7 +26,7 @@ public class User {
 
     }
 
-    public User(String fname, String lname, String cpf, String pwd, String email, String tel, String rg, boolean administrador) {
+    public User(String fname, String lname, String cpf, String pwd, String email, String tel, String rg, Boolean administrador) {
         this.fname = fname;
         this.lname = lname;
         this.cpf = cpf;
@@ -109,11 +109,11 @@ public class User {
         this.conta = conta;
     }
 
-    public boolean isAdministrador() {
+    public Boolean isAdministrador() {
         return administrador;
     }
 
-    public void setAdministrador(boolean administrador) {
+    public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
     }
 

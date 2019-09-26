@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @SpringBootApplication
 public interface ContaRepository extends JpaRepository<Conta, Long>{
-    
+
+    Conta findByFkIdUserId(Long id);
+
+    Conta findByAgenciaAndConta(Long agencia, Long conta);
 }
